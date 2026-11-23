@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inventaire du mobilier régional du Berry</title>
+<meta name="theme-color" content="#7a4524">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Inventaire Berry">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5efe4; --paper:#fffdf8; --ink:#2a2018; --muted:#7b6a5a; --line:#e3d8c6;
+  --accent:#7a4524; --accent-2:#a8653a; --accent-soft:#f1e2d2; --ok:#3f6b3a; --warn:#a0521b; --danger:#9b2c22;
+  --r:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.4;-webkit-text-size-adjust:100%}
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left)}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:650;margin:0;letter-spacing:-.01em}
+button{font:inherit;color:inherit;cursor:pointer}
+input,textarea,select{font:inherit;color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 130px}
+header.top{position:sticky;top:0;z-index:20;background:rgba(245,239,228,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header.top .in{max-width:760px;margin:0 auto;padding:12px 14px 10px;display:flex;align-items:center;gap:10px}
+header.top h1{font-size:1.2rem;flex:1;min-width:0}
+header.top h1 small{display:block;font-family:"Source Sans 3",sans-serif;font-weight:400;font-size:.8rem;color:var(--muted);letter-spacing:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{font-size:.78rem;padding:4px 10px;border-radius:99px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;border:0}
+.pill.warn{background:#f8e1cc;color:var(--warn)}
+.pill.ok{background:#e1ecd9;color:var(--ok)}
+.pill.bad{background:#f6d6d1;color:var(--danger)}
+.banner{margin:12px 0 0;padding:12px 14px;border-radius:var(--r);background:#fbe9d6;border:1px solid #efcfae;font-size:.93rem;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.banner b{flex:1;min-width:180px;font-weight:600}
+.banner.info{background:#eef0e4;border-color:#d6dcc2}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:12px;padding:11px 16px;font-weight:600}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.ghost{background:transparent}
+.btn.danger{color:var(--danger);border-color:#e7c3bd}
+.btn.small{padding:7px 12px;font-size:.88rem}
+.btn:disabled{opacity:.55}
+.tools{display:flex;gap:8px;margin:14px 0 6px}
+.tools input{flex:1;min-width:0;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper)}
+.tools select{padding:11px 10px;border-radius:12px;border:1px solid var(--line);background:var(--paper);max-width:42%}
+.count{color:var(--muted);font-size:.88rem;margin:6px 2px 10px}
+.cards{display:grid;gap:10px}
+.card{display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px;text-align:left;width:100%;align-items:center}
+.card .th{width:74px;height:74px;border-radius:10px;background:var(--accent-soft) center/cover no-repeat;flex:none;display:grid;place-items:center;font-size:1.5rem}
+.card .bd{flex:1;min-width:0}
+.card .t{font-weight:700;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.card .code{font-family:Fraunces,serif;color:var(--accent);font-weight:650;font-size:.86rem;display:block}
+.card .s{color:var(--muted);font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.empty{text-align:center;padding:50px 20px;color:var(--muted)}
+.empty h2{color:var(--ink);font-size:1.4rem;margin-bottom:8px}
+.codebox{background:var(--accent);color:#fff;border-radius:var(--r);padding:12px 14px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.codebox span{font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;opacity:.8}
+.codebox b{font-family:Fraunces,serif;font-size:1.05rem;font-weight:650;word-break:break-all}
+.sec{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);margin:12px 0;padding:14px 14px 6px}
+.sec h2{font-size:1.05rem;margin-bottom:12px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.sec h2 .num{font-family:"Source Sans 3";font-size:.75rem;font-weight:700;background:var(--accent);color:#fff;border-radius:99px;min-width:22px;height:22px;padding:0 6px;display:grid;place-items:center}
+.f{margin-bottom:14px}
+.f>label,.lbl{display:block;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
+.lbl em{font-style:normal;text-transform:none;letter-spacing:0;font-weight:400}
+.req::after{content:" *";color:var(--danger)}
+.f input[type=text],.f input[type=date],.f input[type=number],.f textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#fff}
+.f textarea{min-height:76px;resize:vertical}
+.f input:focus,.f textarea:focus,.tools input:focus{outline:2px solid var(--accent-2);outline-offset:-1px;border-color:transparent}
+.f.missing input,.f.missing textarea{border-color:var(--danger);background:#fff7f5}
+.f.missing>.lbl,.f.missing>label{color:var(--danger)}
+.row{display:flex;gap:10px}.row>.f{flex:1;min-width:0}
+.dims{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.dims .u{position:relative}.dims .u span{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem;pointer-events:none}
+.dims small{display:block;font-size:.75rem;color:var(--muted);margin-top:3px;text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 13px;font-size:.93rem;line-height:1.15;text-align:left}
+.chip.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.chip.learned{border-style:dashed;border-color:var(--accent-2);background:#fdf8f1}
+.chip.learned.on{border-style:solid;background:var(--accent)}
+.autre{margin-top:10px;padding:10px 12px;border-left:3px solid var(--accent-2);background:#fbf6ee;border-radius:0 10px 10px 0}
+.autre .hint{margin:6px 0 0}
+.chip i{font-style:normal;font-size:.72rem;background:#fff;color:var(--accent);border-radius:99px;padding:0 6px;margin-left:6px;font-weight:700}
+.grp{font-size:.78rem;color:var(--muted);margin:2px 0 6px;font-weight:600}
+.grp+.chips{margin-bottom:10px}
+.ta{position:relative}
+.mic{position:absolute;right:6px;bottom:8px;border:0;background:var(--accent-soft);color:var(--accent);border-radius:99px;width:36px;height:36px;display:grid;place-items:center}
+.mic.live{background:var(--danger);color:#fff;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{opacity:.6}}
+.ta textarea{padding-right:48px}
+.checks{display:grid;gap:2px}
+.check{display:flex;gap:10px;align-items:center;padding:7px 0;font-size:.97rem}
+.check input{width:22px;height:22px;accent-color:var(--accent);flex:none}
+.authstate{margin:4px 0 12px;font-size:.92rem}
+.legal{font-size:.92rem;background:#faf5ec;border-radius:10px;padding:10px 12px;margin-bottom:10px;color:#4a3b2e}
+.sigwrap{position:relative;border:1px dashed var(--accent-2);border-radius:12px;background:#fff;touch-action:none}
+.sigwrap canvas{display:block;width:100%;height:170px;border-radius:12px}
+.sigwrap .ph-txt{position:absolute;inset:0;display:grid;place-items:center;color:#c4b29d;pointer-events:none;font-size:.95rem}
+.sigwrap img{display:block;width:100%;height:170px;object-fit:contain}
+.sigacts{display:flex;gap:8px;margin:8px 0 12px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:10px}
+.ph{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;position:relative}
+.ph img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:var(--accent-soft)}
+.ph .x{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:99px;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:18px;line-height:1}
+.ph .n{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.6);color:#fff;font-size:.75rem;border-radius:99px;padding:2px 8px}
+.ph select{width:100%;border:0;border-top:1px solid var(--line);padding:7px 6px;font-size:.82rem;background:#fff}
+.addph{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.addph label{flex:1;min-width:140px;text-align:center}
+.addph input{display:none}
+.hint{font-size:.85rem;color:var(--muted);margin:-4px 0 12px}
+.todo{font-size:.88rem;color:var(--muted);margin:0 0 12px}
+.todo b{color:var(--ink)}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,253,248,.97);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.bar .in{max-width:760px;margin:0 auto;display:flex;gap:8px}
+.bar .btn{flex:1}
+.bar .btn.icon{flex:none}
+.modal{position:fixed;inset:0;background:rgba(30,20,10,.45);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.modal.open{display:flex}
+.sheet{background:var(--paper);width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:20px 18px calc(18px + env(safe-area-inset-bottom));max-height:90vh;overflow:auto}
+.sheet h3{font-size:1.2rem;margin-bottom:8px}
+.sheet p{color:var(--muted);margin:0 0 14px}
+.sheet ul{margin:0 0 6px;padding-left:20px}
+.sheet .acts{display:grid;gap:8px;margin-top:14px}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:.92rem;opacity:0;transition:.25s;z-index:60;pointer-events:none;max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hidden{display:none!important}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.jump{display:flex;gap:6px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;font-size:.82rem;padding:6px 11px;border-radius:99px;background:var(--paper);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-weight:600}
+@media (min-width:700px){.photos{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
+.wrap{padding-bottom:110px}
+.view{padding-top:4px}
+.h{font-size:1.15rem;margin:26px 2px 10px}
+.hero{margin-top:14px;background:linear-gradient(135deg,#7a4524,#a8653a);color:#fff;border-radius:18px;padding:18px 18px 14px}
+.hero .big{display:flex;align-items:baseline;gap:10px}
+.hero .big b{font-family:Fraunces,serif;font-size:3rem;line-height:1;font-weight:650}
+.hero .big span{font-size:1.05rem;opacity:.9}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.kpi{background:rgba(255,255,255,.14);border-radius:12px;padding:8px 10px;border:0;color:#fff;text-align:left}
+.kpi b{display:block;font-size:1.3rem;font-family:Fraunces,serif;font-weight:650}
+.kpi span{font-size:.78rem;opacity:.9}
+.kpi.warn{background:rgba(255,214,170,.28)}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.actions .act-new{grid-column:1/-1}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(102px,1fr));gap:8px}
+.tile{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 8px 10px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tile svg{width:34px;height:34px;color:var(--accent)}
+.tile b{font-family:Fraunces,serif;font-size:1.25rem;font-weight:650;line-height:1}
+.tile span{font-size:.8rem;color:var(--muted);line-height:1.15}
+.tile.zero{opacity:.45}
+.ico{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.mapbox{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:8px}
+.mapwrap{position:relative;border-radius:10px;overflow:hidden;background:#f3ecdf;touch-action:none}
+#map{display:block;width:100%;height:auto;aspect-ratio:1.13;cursor:grab;user-select:none}
+.mapctl{position:absolute;right:8px;top:8px;display:grid;gap:6px}
+.mapctl button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:#fffdf8;font-size:1.1rem}
+.maplegend span{white-space:nowrap}
+.maplegend{display:flex;flex-wrap:wrap;gap:12px;font-size:.8rem;color:var(--muted);padding:8px 4px 2px}
+.lg{display:inline-block;width:10px;height:10px;border-radius:99px;margin-right:5px;vertical-align:-1px}
+.lg.c{background:#fff;border:2px solid var(--accent)} .lg.h{background:#fff;border:2px solid #3f6b3a}
+.lg.d18{background:#d9c3a5} .lg.d36{background:#bfcbb0}
+.mappanel{border-top:1px solid var(--line);margin-top:8px;padding:10px 4px 4px}
+.mappanel h3{font-size:1.05rem;margin-bottom:2px}
+.mappanel .sub{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+.mappanel .ld{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 6px}
+.mini{display:flex;gap:10px;align-items:center;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:7px 9px;margin-bottom:6px}
+.mini svg{width:26px;height:26px;color:var(--accent);flex:none}
+.mini .c{font-family:Fraunces,serif;font-size:.8rem;color:var(--accent)}
+.mini .m{flex:1;min-width:0}
+.mini .m div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bars{display:grid;gap:6px}
+.barrow{display:grid;grid-template-columns:118px 1fr 28px;gap:8px;align-items:center;font-size:.86rem}
+.barrow .lab{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.barrow .track{height:12px;background:#ece2d2;border-radius:99px;overflow:hidden}
+.barrow .track i{display:block;height:100%;background:var(--accent-2);border-radius:99px}
+.barrow b{text-align:right}
+.tools2{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.card .th img{width:100%;height:100%;object-fit:cover;border-radius:10px;display:block}
+#status{cursor:pointer}
+.card .th svg{width:38px;height:38px;color:var(--accent-2)}
+.cpick{position:relative}
+.sugg{position:absolute;left:0;right:0;top:100%;margin-top:-8px;z-index:15;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 24px rgba(60,40,20,.16);max-height:290px;overflow:auto}
+.sugg button{display:flex;justify-content:space-between;gap:10px;width:100%;padding:11px 12px;border:0;border-bottom:1px solid #f1eadf;background:#fff;text-align:left}
+.sugg button:last-child{border-bottom:0}
+.sugg button small{color:var(--muted)}
+.sugg .manual{color:var(--accent);font-weight:600}
+.ok-txt{color:var(--ok)} .warn-txt{color:var(--warn)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(108px,1fr));gap:6px}
+.gallery button{border:0;padding:0;background:var(--accent-soft);border-radius:10px;overflow:hidden;position:relative;aspect-ratio:1}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery button span{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(transparent,rgba(0,0,0,.65));color:#fff;font-size:.7rem;padding:12px 6px 4px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lightbox{position:fixed;inset:0;z-index:70;background:rgba(16,12,8,.95);display:flex;align-items:center;justify-content:center;touch-action:pan-y}
+.lightbox img{max-width:100%;max-height:calc(100% - 130px);object-fit:contain}
+.lbx{position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;width:42px;height:42px;border-radius:99px;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:1.2rem}
+.lbnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:64px;border:0;background:rgba(255,255,255,.12);color:#fff;font-size:2rem;border-radius:10px}
+.lbnav.prev{left:6px}.lbnav.next{right:6px}
+.lbcap{position:absolute;left:0;right:0;bottom:0;padding:12px 16px calc(14px + env(safe-area-inset-bottom));color:#fff;display:flex;gap:10px;align-items:center;justify-content:space-between;background:linear-gradient(transparent,rgba(0,0,0,.6))}
+.lbcap div{font-size:.9rem;line-height:1.3}
+.lbcap b{font-family:Fraunces,serif}
+.lbcap .btn{color:var(--ink);flex:none}
+.notice{margin-top:14px;background:#eef0e4;border:1px solid #d6dcc2;border-radius:var(--r);padding:10px 12px;font-size:.9rem}
+.people{display:grid;gap:10px}
+.person{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:12px}
+.person .top{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.person .av{width:40px;height:40px;border-radius:99px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;flex:none}
+.person .nm{font-weight:700}
+.person .meta{color:var(--muted);font-size:.88rem}
+.person .tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.person .more{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.person .line{font-size:.92rem;margin-bottom:4px}
+.person .line a{color:var(--accent)}
+.person .pacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,253,248,.97);border-top:1px solid var(--line);display:flex;justify-content:space-around;align-items:center;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.tabs button{flex:1;border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.72rem;color:var(--muted);padding:4px 0}
+.tabs button svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button.on{color:var(--accent);font-weight:700}
+.tabs .plus{flex:none;width:56px;height:56px;border-radius:99px;background:var(--accent);color:#fff;margin-top:-22px;box-shadow:0 6px 16px rgba(122,69,36,.35);justify-content:center}
+.tabs .plus svg{width:28px;height:28px;stroke-width:2.4}
+@media (min-width:700px){.gallery{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.kpis{grid-template-columns:repeat(6,1fr)}}
+</style>
+</head>
+<body>
+<header class="top"><div class="in">
+  <h1 id="hTitle">Mobilier régional du Berry<small id="hSub">Inventaire de terrain — mémoire de master</small></h1>
+  <span class="pill" id="status">Connexion…</span>
+</div></header>
+
+<div class="wrap">
+  <div id="draftBanner" class="banner hidden"><b>Une fiche non enregistrée a été retrouvée.</b>
+    <button class="btn small primary" id="draftResume">Reprendre</button>
+    <button class="btn small ghost" id="draftDrop">Supprimer</button></div>
+  <div id="outboxBanner" class="banner hidden"><b id="outboxText"></b>
+    <button class="btn small primary" id="syncBtn">Synchroniser</button></div>
+  <div id="ghBanner" class="banner hidden"><b>Cet appareil n'est pas encore connecté au dépôt de données GitHub.</b>
+    <button class="btn small primary" id="ghConnect">Connecter</button></div>
+  <div id="exportBanner" class="banner info hidden"><b id="exportText"></b>
+    <button class="btn small primary" id="exportNow">Exporter</button></div>
+
+  <!-- ACCUEIL -->
+  <section id="vHome" class="view">
+    <div class="hero">
+      <div class="big"><b id="hN">0</b><span>meubles recensés</span></div>
+      <div class="kpis" id="hKpis"></div>
+    </div>
+    <div class="actions">
+      <button class="btn primary act-new">＋ Nouvelle fiche</button>
+      <button class="btn act-pdf">🖨 Fiche papier (PDF)</button>
+      <button class="btn act-export">⇩ Exporter</button>
+      <button class="btn act-settings" style="grid-column:1/-1">⚙ Connexion GitHub</button>
+    </div>
+
+    <h2 class="h">Par type de meuble</h2>
+    <div class="tiles" id="tiles"></div>
+
+    <h2 class="h">Carte des collectes</h2>
+    <div class="mapbox">
+      <div class="mapwrap" id="mapWrap"><svg id="map" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="mapctl"><button type="button" id="zIn" aria-label="Zoom avant">＋</button><button type="button" id="zOut" aria-label="Zoom arrière">−</button><button type="button" id="zReset" aria-label="Recentrer">⤢</button></div>
+      </div>
+      <div class="maplegend"><span><i class="lg c"></i>commune</span><span><i class="lg h"></i>hameau (GPS)</span><span><i class="lg d18"></i>Cher</span><span><i class="lg d36"></i>Indre</span></div>
+      <div id="mapNote" class="hint"></div>
+      <div id="mapPanel" class="mappanel hidden"></div>
+    </div>
+
+    <h2 class="h">Par sous-région</h2>
+    <div class="bars" id="srBars"></div>
+
+    <h2 class="h">Dernières fiches</h2>
+    <div class="cards" id="recent"></div>
+    <div class="empty hidden" id="homeEmpty"><h2>Bienvenue !</h2>Commencez par « Nouvelle fiche ». La fiche papier (PDF) est là pour les visites sans téléphone.</div>
+  </section>
+
+  <!-- LISTE -->
+  <section id="vList" class="view hidden">
+    <div class="tools">
+      <input id="q" type="search" placeholder="Rechercher (code, type, propriétaire, commune, hameau…)">
+      <select id="fType"><option value="">Tous types</option></select>
+    </div>
+    <div class="tools2">
+      <label class="check"><input type="checkbox" id="fTodo"> À compléter seulement</label>
+      <button class="btn small act-export">⇩ Exporter</button>
+    </div>
+    <div class="count" id="count"></div>
+    <div class="cards" id="cards"></div>
+    <div class="empty hidden" id="empty">
+      <h2>Aucune fiche</h2>
+      Touchez « ＋ » pour recenser un meuble. Le numéro d'inventaire BERRY-… se crée tout seul dès que la sous-région est choisie.
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section id="vGallery" class="view hidden">
+    <div class="tools">
+      <select id="gType"><option value="">Tous types</option></select>
+      <select id="gLeg"><option value="">Toutes les vues</option></select>
+    </div>
+    <div class="count" id="gCount"></div>
+    <div class="gallery" id="gallery"></div>
+    <div class="empty hidden" id="gEmpty"><h2>Pas encore de photos</h2>Les photos ajoutées aux fiches apparaissent ici.</div>
+  </section>
+
+  <!-- ANNUAIRE -->
+  <section id="vPeople" class="view hidden">
+    <div class="notice">🔒 Annuaire privé : toutes les personnes rencontrées, <b>quel que soit leur niveau d'autorisation</b>. Ces coordonnées ne sont jamais mises dans l'export Excel du mémoire.</div>
+    <div class="tools">
+      <input id="pq" type="search" placeholder="Rechercher (nom, commune, téléphone…)">
+      <button class="btn small" id="pCsv">⇩ CSV</button>
+    </div>
+    <div class="count" id="pCount"></div>
+    <div class="people" id="people"></div>
+    <div class="empty hidden" id="pEmpty"><h2>Annuaire vide</h2>Les propriétaires saisis dans les fiches apparaissent ici automatiquement.</div>
+  </section>
+
+  <!-- FICHE -->
+  <form id="vForm" class="hidden" autocomplete="off">
+    <nav class="jump">
+      <a href="#s0">Code</a><a href="#s-aut">Autorisation</a><a href="#s1">1 · Identif.</a><a href="#s2">2 · Technique</a><a href="#s3">3 · Histoire</a><a href="#s4">4 · Socio.</a><a href="#s5">5 · Évaluation</a><a href="#s6">6 · Notes</a><a href="#s-ph">Photos</a>
+    </nav>
+    <div class="codebox"><div><span>N° d'inventaire</span><br><b id="codeOut">—</b></div><span id="seqInfo"></span></div>
+
+    <div class="sec" id="s0">
+      <h2>Collecte</h2>
+      <div class="row">
+        <div class="f" data-req="DATE_COLLECTE"><label class="req">Date de collecte</label><input type="date" data-k="DATE_COLLECTE"></div>
+        <div class="f" data-req="COLLECTEUR"><label class="req">Collecteur</label><input type="text" data-k="COLLECTEUR" placeholder="Prénom NOM"></div>
+      </div>
+      <div class="f" data-req="SOUS_REGION_CODE"><span class="lbl req">Sous-région du lieu de conservation</span>
+        <div class="grp">Cher (18) — Haut-Berry</div><div class="chips" data-chips="SOUS_REGION_CODE" data-sub="CHR"></div>
+        <div class="grp">Indre (36) — Bas-Berry</div><div class="chips" data-chips="SOUS_REGION_CODE" data-sub="IND"></div>
+      </div>
+      <div class="f" data-req="TYPE_MEUBLE"><span class="lbl req">Type de meuble</span><div class="chips" data-chips="TYPE_MEUBLE"></div></div>
+      <div class="f"><label>Appellation complémentaire</label><input type="text" data-k="typeSpec" placeholder="Ex. : armoire de mariage à deux portes"></div>
+    </div>
+
+    <div class="sec" id="s-aut">
+      <h2>Autorisation du propriétaire</h2>
+      <span class="lbl">Partie 1 — éléments autorisés</span>
+      <div class="checks" id="authChecks"></div>
+      <div class="authstate" id="authState"></div>
+      <div class="legal" id="legalTxt"></div>
+      <div class="f"><span class="lbl">Signature du propriétaire <em>(au doigt)</em></span>
+        <div class="sigwrap" id="sigWrap"><canvas id="sigCanvas"></canvas><div class="ph-txt" id="sigPh">Signer ici</div></div>
+        <div class="sigacts"><button type="button" class="btn small" id="sigClear">Effacer</button><span class="hint" style="margin:6px 0 0" id="sigInfo"></span></div>
+      </div>
+    </div>
+
+    <div class="sec" id="s1">
+      <h2><span class="num">1</span>Identification & gestion documentaire</h2>
+      <div class="f"><label>Propriétaire</label><input type="text" data-k="PROPRIETAIRE" id="ownerIn" placeholder="Nom complet" list="dlOwners"></div>
+      <datalist id="dlOwners"></datalist>
+      <div class="f"><div class="chips" data-chips="proprioType"></div></div>
+      <p class="hint" id="anonHint"></p>
+      <div class="row">
+        <div class="f"><label>Téléphone</label><input type="tel" data-k="tel" inputmode="tel"></div>
+        <div class="f"><label>E-mail</label><input type="text" data-k="email" inputmode="email" autocapitalize="off"></div>
+      </div>
+      <p class="hint">Téléphone et e-mail restent dans l'annuaire privé, jamais dans l'export Excel.</p>
+      <div class="f cpick"><label>Commune <em style="text-transform:none;font-weight:400">— nom ou code postal</em></label>
+        <input type="text" id="communeIn" data-k="commune" autocomplete="off" placeholder="Ex. : Sancerre ou 18300">
+        <div class="sugg hidden" id="communeSugg"></div>
+        <p class="hint" id="communeInfo"></p>
+      </div>
+      <div class="row">
+        <div class="f"><label>Hameau / lieu-dit</label><input type="text" data-k="lieudit" id="lieuditIn" list="dlLieudits"></div>
+        <div class="f"><label>Adresse</label><input type="text" data-k="adresse"></div>
+      </div>
+      <datalist id="dlLieudits"></datalist>
+      <div class="f"><label>Coordonnées GPS <em style="text-transform:none;font-weight:400">— facultatif, pour placer un hameau précisément</em></label>
+        <input type="text" data-k="gps" id="gpsIn" inputmode="decimal" placeholder="Ex. : 47.3248, 2.8220">
+        <p class="hint" id="gpsInfo">Dans Google Maps ou Plans : appui long sur le lieu → copier les coordonnées → coller ici.</p>
+      </div>
+      <div class="f ta"><label>Références documentaires</label><textarea data-k="REFS_DOCUMENTAIRES" placeholder="Inventaires après décès, actes notariaux, AD18/AD36…"></textarea></div>
+    </div>
+
+    <div class="sec" id="s2">
+      <h2><span class="num">2</span>Description technique & matérielle</h2>
+      <div class="f"><span class="lbl">Dimensions <em>(cm entiers)</em></span>
+        <div class="dims">
+          <div><div class="u"><input type="number" inputmode="numeric" step="1" data-k="LONGUEUR_CM"><span>cm</span></div><small>Longueur</small></div>
+          <div><div class="u"><input type="number" inputmode="numeric" step="1" data-k="LARGEUR_CM"><span>cm</span></div><small>Largeur</small></div>
+          <div><div class="u"><input type="number" inputmode="numeric" step="1" data-k="HAUTEUR_CM"><span>cm</span></div><small>Hauteur</small></div>
+        </div></div>
+      <div class="f"><span class="lbl">Essence(s) de bois <em>— 2 max., dans l'ordre (1 = principale)</em></span><div class="chips" data-chips="essences"></div></div>
+      <div class="f"><span class="lbl">Origine du bois</span><div class="chips" data-chips="ORIGINE_BOIS"></div></div>
+      <div class="f"><span class="lbl">Technique de construction dominante</span><div class="chips" data-chips="TECHNIQUE_CONSTRUCTION"></div></div>
+      <div class="f"><span class="lbl">État de conservation</span><div class="chips" data-chips="ETAT_CONSERVATION"></div></div>
+      <div class="f"><span class="lbl">Degré d'authenticité / restauration</span><div class="chips" data-chips="DEGRE_AUTHENTICITE"></div></div>
+      <div data-if="DEGRE_AUTHENTICITE=Restauration partielle|Restauration majeure">
+        <div class="f"><span class="lbl">Restauration réalisée par</span><div class="chips" data-chips="restauPar"></div></div>
+        <div class="f"><span class="lbl">Période de restauration</span><div class="chips" data-chips="restauPeriode"></div></div>
+        <div class="f ta"><label>Précisions sur la restauration</label><textarea data-k="restauPrecisions"></textarea></div>
+      </div>
+      <div class="f ta"><label>Éléments décoratifs</label><textarea data-k="ELEMENTS_DECORATIFS" placeholder="Sculptures, ferrures, marqueterie…"></textarea></div>
+      <div class="f"><span class="lbl">Finition de surface</span><div class="chips" data-chips="FINITION_SURFACE"></div></div>
+      <div class="f"><label>Signature / marque / estampille <em style="text-transform:none;font-weight:400">(transcrire exactement)</em></label><input type="text" data-k="SIGNATURE_ESTAMPILLE"></div>
+    </div>
+
+    <div class="sec" id="s3">
+      <h2><span class="num">3</span>Analyse historique & typologique</h2>
+      <div class="f"><span class="lbl">Période de fabrication</span><div class="chips" data-chips="PERIODE_FABRICATION"></div></div>
+      <div class="f"><label>Éventuellement décennie</label><input type="text" data-k="decennie" placeholder="Ex. : 1780"></div>
+      <div class="f"><span class="lbl">Style régional</span><div class="chips" data-chips="STYLE_REGIONAL"></div></div>
+      <div class="f"><label>Filiation typologique</label><input type="text" data-k="FILIATION_TYPOLOGIQUE" placeholder="Réf. musée ou bibliographique (ex. Musée du Berry, inv. 1982.14)"></div>
+      <div class="f"><span class="lbl">Provenance</span><div class="chips" data-chips="PROVENANCE"></div></div>
+      <div class="row">
+        <div class="f"><label>Fonction d'origine</label><input type="text" data-k="FONCTION_ORIGINE" placeholder="Rangement du linge…"></div>
+        <div class="f"><label>Fonction actuelle</label><input type="text" data-k="FONCTION_ACTUELLE" placeholder="Décoration…"></div>
+      </div>
+      <div class="f"><span class="lbl">Indice de rareté</span><div class="chips" data-chips="INDICE_RARETE"></div></div>
+      <div class="f ta" data-if="INDICE_RARETE=Rare|Exemplaire unique" data-req="rareteArg"><label class="req">Évaluation argumentée de la rareté</label><textarea data-k="rareteArg"></textarea></div>
+      <div class="f ta" data-if="INDICE_RARETE=Commun|Peu courant"><label>Évaluation argumentée de la rareté</label><textarea data-k="rareteArg"></textarea></div>
+    </div>
+
+    <div class="sec" id="s4">
+      <h2><span class="num">4</span>Contexte sociologique & culturel</h2>
+      <div class="f"><span class="lbl">Milieu social d'origine</span><div class="chips" data-chips="MILIEU_SOCIAL"></div></div>
+      <div class="row">
+        <div class="f"><label>Emplacement d'origine</label><input type="text" data-k="EMPLACEMENT_ORIGINE" placeholder="Salle commune, chambre…"></div>
+        <div class="f"><label>Emplacement actuel</label><input type="text" data-k="EMPLACEMENT_ACTUEL" placeholder="Salon…"></div>
+      </div>
+      <div class="f"><span class="lbl">Sous-région d'origine — indiquée par le propriétaire</span><div class="chips" data-chips="srOrigineIndiquee"></div></div>
+      <div class="f"><span class="lbl">Sous-région d'origine — attestée stylistiquement</span><div class="chips" data-chips="srOrigineAttestee"></div></div>
+      <div class="f"><label>Transmission intergénérationnelle</label><input type="text" data-k="TRANSMISSION_INTERGENE" placeholder="Ex. : 3 générations"></div>
+      <div class="f"><span class="lbl">Valeur symbolique attestée</span><div class="chips" data-chips="VALEUR_SYMBOLIQUE"></div></div>
+      <div class="f"><span class="lbl">Récits oraux associés</span><div class="chips" data-chips="RECITS_ORAUX"></div></div>
+      <div class="f ta" data-if="RECITS_ORAUX=Oui (noter ci-dessous)" data-req="RESUME_RECIT_ORAL"><label class="req">Résumé du récit oral</label><textarea data-k="RESUME_RECIT_ORAL" placeholder="Famille, anecdotes, contexte de la rencontre"></textarea></div>
+    </div>
+
+    <div class="sec" id="s5">
+      <h2><span class="num">5</span>Évaluation patrimoniale</h2>
+      <div class="f"><span class="lbl">Marqueur de régionalité berrichonne</span><div class="chips" data-chips="MARQUEUR_REGIONALITE"></div></div>
+      <div class="f"><span class="lbl">Intérêt patrimonial global</span><div class="chips" data-chips="INTERET_PATRIMONIAL"></div></div>
+      <div class="f"><span class="lbl">Potentiel de classement / protection</span><div class="chips" data-chips="POTENTIEL_CLASSEMENT"></div></div>
+      <div class="f ta" data-req="JUSTIFICATION_NOTE"><label id="justLbl">Justification de la note patrimoniale</label><textarea data-k="JUSTIFICATION_NOTE" placeholder="Argument scientifique (obligatoire si intérêt ≥ 4)"></textarea></div>
+    </div>
+
+    <div class="sec" id="s6">
+      <h2><span class="num">6</span>Informations complémentaires</h2>
+      <div class="f ta"><label>Notes / autres remarques</label><textarea data-k="AUTRES_REMARQUES" placeholder="Récit libre du propriétaire, anecdotes, contexte de la rencontre…"></textarea></div>
+    </div>
+
+    <div class="sec" id="s-ph">
+      <h2>Photos</h2>
+      <p class="todo" id="photoTodo"></p>
+      <div class="photos" id="photos"></div>
+      <div class="addph">
+        <label class="btn primary">📷 Prendre une photo<input type="file" accept="image/*" capture="environment" id="inCam"></label>
+        <label class="btn">🖼️ Depuis la galerie<input type="file" accept="image/*" multiple id="inGal"></label>
+      </div>
+      <p class="hint">Conseil : prenez les photos avec l'appareil photo du téléphone puis ajoutez-les « depuis la galerie » — les originaux pleine résolution restent ainsi dans votre pellicule. Ici elles sont réduites (≈ 1800 px) et nommées CODE-P01, P02… à l'export.</p>
+    </div>
+
+    <div class="sec" id="delSec" style="padding-bottom:14px">
+      <button type="button" class="btn danger" id="delBtn" style="width:100%">Supprimer cette fiche</button>
+    </div>
+  </form>
+</div>
+
+<nav class="tabs" id="barTabs">
+  <button type="button" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Accueil</span></button>
+  <button type="button" data-tab="list"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Fiches</span></button>
+  <button type="button" class="plus act-new" aria-label="Nouvelle fiche"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+  <button type="button" data-tab="gallery"><svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg><span>Galerie</span></button>
+  <button type="button" data-tab="people"><svg viewBox="0 0 24 24"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20c.6-3.4 3.3-5.5 6.5-5.5s5.9 2.1 6.5 5.5M16 4.3a3.5 3.5 0 0 1 0 6.4M18 14.8c1.9.7 3.2 2.6 3.5 5.2"/></svg><span>Annuaire</span></button>
+</nav>
+<div class="bar hidden" id="barForm"><div class="in">
+  <button class="btn icon ghost" id="cancelBtn" aria-label="Retour">✕</button>
+  <button class="btn" id="saveNextBtn">Enregistrer + suivante</button>
+  <button class="btn primary" id="saveBtn">Enregistrer</button>
+</div></div>
+
+<div class="lightbox hidden" id="lb">
+  <button type="button" class="lbx" id="lbClose" aria-label="Fermer">✕</button>
+  <button type="button" class="lbnav prev" id="lbPrev" aria-label="Précédente">‹</button>
+  <img id="lbImg" alt="">
+  <button type="button" class="lbnav next" id="lbNext" aria-label="Suivante">›</button>
+  <div class="lbcap"><div id="lbCap"></div><button class="btn small" id="lbOpen">Ouvrir la fiche</button></div>
+</div>
+
+<div class="modal" id="mDialog"><div class="sheet" id="mBody"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="jszip.min.js" defer></script>
+<script id="communesData" type="text/plain">
+36001;Aigurande;36140;1.8489;46.4572
+36002;Aize;36150;1.7061;47.1048
+36003;Ambrault;36120;1.9496;46.786
+36004;Anjouin;36210;1.8077;47.202
+36005;Ardentes;36120;1.8151;46.7373
+36006;Argenton-sur-Creuse;36200;1.494;46.5752
+36007;Argy;36500;1.4632;46.9408
+36008;Arpheuilles;36700;1.2754;46.9021
+36009;Arthon;36330;1.7156;46.695
+36010;Azay-le-Ferron;36290;1.0829;46.8485
+36011;Bagneux;36210;1.7588;47.1704
+36012;Baraize;36270;1.5719;46.4857
+36013;Baudres;36110;1.5727;47.0559
+36014;Bazaiges;36270;1.5264;46.487
+36015;Beaulieu;36310;1.298;46.3882
+36016;Bélâbre;36370;1.1757;46.5501
+36017;La Berthenoux;36400;2.0531;46.7001
+36018;Le Blanc;36300;1.0955;46.6351
+36019;Bommiers;36120;2.0013;46.7765
+36020;Bonneuil;36310;1.2456;46.3829
+36021;Les Bordes;36100;1.9692;46.9896
+36022;Bouesse;36200;1.6886;46.6224
+36023;Bouges-le-Château;36110;1.6686;47.032
+36024;Bretagne;36110;1.6989;46.9995
+36025;Briantes;36400;2.0274;46.5511
+36026;Brion;36110;1.7253;46.9473
+36027;Brives;36100;1.92;46.8564
+36028;La Buxerette;36140;1.7994;46.4943
+36029;Buxeuil;36150;1.6973;47.1273
+36030;Buxières-d'Aillac;36230;1.7512;46.6377
+36031;Buzançais;36500;1.421;46.8833
+36032;Ceaulmont;36200;1.5592;46.531
+36033;Celon;36200;1.5125;46.5315
+36034;Chabris;36210;1.6672;47.253
+36035;Chaillac;36310;1.2879;46.427
+36036;Chalais;36370;1.2259;46.5389
+36037;La Champenoise;36100;1.799;46.9485
+36038;Champillet;36160;2.1096;46.5474
+36040;La Chapelle-Orthemale;36500;1.4506;46.8328
+36041;La Chapelle-Saint-Laurian;36150;1.7853;47.052
+36042;Chasseneuil;36800;1.4906;46.6578
+36043;Chassignolles;36400;1.9378;46.533
+36044;Châteauroux;36000;1.6903;46.8023
+36045;Châtillon-sur-Indre;36700;1.1728;46.993
+36046;La Châtre;36400;1.9928;46.5709
+36047;La Châtre-Langlin;36170;1.3899;46.407
+36048;Chavin;36200;1.6109;46.565
+36049;Chazelet;36170;1.4315;46.5107
+36050;Chezelles;36500;1.5665;46.8984
+36051;Chitray;36800;1.3577;46.6608
+36052;Chouday;36100;2.0583;46.9203
+36053;Ciron;36300;1.2721;46.6252
+36054;Cléré-du-Bois;36700;1.0981;46.9386
+36055;Clion;36700;1.2293;46.9412
+36056;Cluis;36340;1.743;46.5372
+36057;Coings;36130;1.722;46.8811
+36058;Concremiers;36300;1.0194;46.5934
+36059;Condé;36100;1.9817;46.8809
+36060;Crevant;36140;1.9414;46.4719
+36061;Crozon-sur-Vauvre;36140;1.8734;46.4805
+36062;Cuzion;36190;1.6121;46.4652
+36063;Déols;36130;1.7018;46.8397
+36064;Diors;36130;1.8118;46.8283
+36065;Diou;36260;2.0013;47.0442
+36066;Douadic;36300;1.1143;46.7014
+36067;Dunet;36310;1.2882;46.472
+36068;Dun-le-Poëlier;36210;1.7479;47.2197
+36069;Écueillé;36240;1.3605;47.0802
+36070;Éguzon-Chantôme;36270;1.5675;46.4286
+36071;Étrechet;36120;1.7799;46.789
+36073;Feusines;36160;2.0987;46.5103
+36074;Fléré-la-Rivière;36700;1.0933;46.9982
+36075;Fontenay;36150;1.739;47.0557
+36076;Fontgombault;36220;0.9748;46.6717
+36077;Fontguenand;36600;1.5381;47.2044
+36078;Fougerolles;36230;1.8729;46.572
+36079;Francillon;36110;1.5581;46.9451
+36080;Frédille;36180;1.476;47.0025
+36081;Gargilesse-Dampierre;36190;1.619;46.5053
+36082;Gehée;36240;1.495;47.0381
+36083;Giroux;36150;1.9111;47.0663
+36084;Gournay;36230;1.7361;46.5976
+36085;Guilly;36150;1.7346;47.0909
+36086;Heugnes;36180;1.3875;47.0283
+36087;Ingrandes;36300;0.9626;46.5952
+36088;Issoudun;36100;2.0077;46.9447
+36089;Jeu-les-Bois;36120;1.7931;46.6811
+36090;Jeu-Maloches;36240;1.4404;47.0465
+36091;Lacs;36400;2.0347;46.5923
+36092;Langé;36600;1.5033;47.0747
+36093;Levroux;36110;1.5919;46.9744
+36094;Lignac;36370;1.204;46.4763
+36095;Lignerolles;36160;2.1653;46.4994
+36096;Lingé;36220;1.1217;46.7584
+36097;Liniez;36150;1.7591;47.0152
+36098;Lizeray;36100;1.8997;46.9814
+36099;Lourdoueix-Saint-Michel;36140;1.7219;46.418
+36100;Lourouer-Saint-Laurent;36400;2.0211;46.6176
+36101;Luant;36350;1.5653;46.7246
+36102;Luçay-le-Libre;36150;1.9147;47.0938
+36103;Luçay-le-Mâle;36360;1.4211;47.1175
+36104;Lurais;36220;0.9371;46.6898
+36105;Lureuil;36220;1.0407;46.745
+36106;Luzeret;36800;1.3894;46.5487
+36107;Lye;36600;1.4684;47.2198
+36108;Lys-Saint-Georges;36230;1.8152;46.6463
+36109;Le Magny;36400;1.955;46.5566
+36110;Maillet;36340;1.6741;46.5797
+36111;Malicornay;36340;1.6462;46.5708
+36112;Mâron;36120;1.8655;46.7992
+36113;Martizay;36220;1.0407;46.8072
+36114;Mauvières;36370;1.1127;46.5643
+36115;Menetou-sur-Nahon;36210;1.6373;47.2265
+36116;Ménétréols-sous-Vatan;36150;1.8337;47.0138
+36117;Le Menoux;36200;1.573;46.5572
+36118;Méobecq;36500;1.4106;46.7453
+36119;Mérigny;36220;0.9337;46.6327
+36120;Mers-sur-Indre;36230;1.8693;46.6689
+36121;Meunet-Planches;36100;1.9816;46.8496
+36122;Meunet-sur-Vatan;36150;1.8579;47.0907
+36123;Mézières-en-Brenne;36290;1.257;46.808
+36124;Migné;36800;1.3003;46.7147
+36125;Migny;36260;2.0552;47.0189
+36126;Montchevrier;36140;1.7549;46.4804
+36127;Montgivray;36400;1.9746;46.5955
+36128;Montierchaume;36130;1.7741;46.866
+36129;Montipouret;36230;1.9093;46.6578
+36130;Montlevicq;36400;2.0834;46.5809
+36131;Mosnay;36200;1.6256;46.623
+36132;La Motte-Feuilly;36160;2.0653;46.5473
+36133;Mouhers;36340;1.7788;46.5647
+36134;Mouhet;36170;1.4478;46.3848
+36135;Moulins-sur-Céphons;36110;1.5634;47.0063
+36136;Murs;36700;1.1604;46.9236
+36137;Néons-sur-Creuse;36220;0.9097;46.7295
+36138;Néret;36400;2.143;46.5725
+36139;Neuillay-les-Bois;36500;1.4807;46.7603
+36140;Neuvy-Pailloux;36100;1.8668;46.903
+36141;Neuvy-Saint-Sépulchre;36230;1.8145;46.5906
+36142;Niherne;36250;1.5599;46.8049
+36143;Nohant-Vic;36400;1.9617;46.6504
+36144;Nuret-le-Ferron;36800;1.4244;46.6867
+36145;Obterre;36290;1.0709;46.9119
+36146;Orsennes;36190;1.7029;46.4837
+36147;Orville;36210;1.7777;47.1457
+36148;Oulches;36800;1.3119;46.6036
+36149;Palluau-sur-Indre;36500;1.3115;46.9512
+36150;Parnac;36170;1.4607;46.441
+36152;Paudy;36260;1.9215;47.0376
+36153;Paulnay;36290;1.1553;46.8663
+36154;Le Pêchereau;36200;1.5704;46.584
+36155;Pellevoisin;36180;1.4169;46.9891
+36156;Pérassay;36160;2.1458;46.4763
+36157;La Pérouille;36350;1.5225;46.7128
+36158;Badecon-le-Pin;36200;1.6023;46.5302
+36159;Le Poinçonnet;36330;1.7257;46.7544
+36160;Pommiers;36190;1.6498;46.5186
+36161;Le Pont-Chrétien-Chabenet;36800;1.4973;46.6297
+36162;Poulaines;36210;1.6567;47.1445
+36163;Pouligny-Notre-Dame;36160;2.0099;46.4699
+36164;Pouligny-Saint-Martin;36160;2.0089;46.5165
+36165;Pouligny-Saint-Pierre;36300;1.0529;46.6866
+36166;Préaux;36240;1.2968;47.0299
+36167;Preuilly-la-Ville;36220;0.9796;46.697
+36168;Prissac;36370;1.2946;46.5195
+36169;Pruniers;36120;2.0636;46.7824
+36170;Reboursin;36150;1.8101;47.108
+36171;Reuilly;36260;2.0012;47.0859
+36172;Rivarennes;36800;1.3781;46.6212
+36173;Rosnay;36300;1.2091;46.7112
+36174;Roussines;36170;1.3732;46.4628
+36175;Rouvres-les-Bois;36110;1.6596;47.0763
+36176;Ruffec;36300;1.1793;46.6281
+36177;Sacierges-Saint-Martin;36170;1.3778;46.4975
+36178;Saint-Aigny;36300;1.0079;46.6353
+36179;Saint-Aoustrille;36100;1.931;46.9333
+36180;Saint-Août;36120;1.9669;46.7278
+36181;Saint-Aubin;36100;2.0356;46.8678
+36182;Saint-Benoît-du-Sault;36170;1.3997;46.4466
+36184;Saint-Chartier;36400;1.98;46.6722
+36185;Saint-Christophe-en-Bazelle;36210;1.7164;47.1853
+36186;Saint-Christophe-en-Boucherie;36400;2.1196;46.6786
+36187;Saint-Civran;36170;1.4069;46.4972
+36188;Saint-Cyran-du-Jambot;36700;1.1542;47.0195
+36189;Saint-Denis-de-Jouhet;36230;1.8472;46.5237
+36190;Sainte-Fauste;36100;1.8692;46.8587
+36191;Saint-Florentin;36150;1.7802;47.1008
+36192;Saint-Gaultier;36800;1.4304;46.649
+36193;Sainte-Gemme;36500;1.3328;46.8586
+36194;Saint-Genou;36500;1.3473;46.9142
+36195;Saint-Georges-sur-Arnon;36100;2.0572;46.9886
+36196;Saint-Gilles;36170;1.4483;46.4796
+36197;Saint-Hilaire-sur-Benaize;36370;1.069;46.5545
+36198;Saint-Lactencin;36500;1.4929;46.9
+36199;Sainte-Lizaigne;36260;1.9995;47.0078
+36200;Saint-Marcel;36200;1.5195;46.6112
+36202;Saint-Maur;36250;1.6203;46.8109
+36203;Saint-Médard;36700;1.2677;47.0054
+36204;Saint-Michel-en-Brenne;36290;1.1705;46.7858
+36205;Saint-Pierre-de-Jards;36260;1.9693;47.1005
+36207;Saint-Plantaire;36190;1.6472;46.4336
+36208;Sainte-Sévère-sur-Indre;36160;2.0709;46.5072
+36209;Saint-Valentin;36100;1.8537;46.9628
+36210;Sarzay;36230;1.9096;46.5965
+36211;Sassierges-Saint-Germain;36120;1.8908;46.7466
+36212;Saulnay;36290;1.2555;46.8712
+36213;Sauzelles;36220;0.9855;46.6546
+36214;Sazeray;36160;2.039;46.4485
+36215;Ségry;36100;2.1012;46.8762
+36216;Selles-sur-Nahon;36180;1.4548;47.0184
+36217;Sembleçay;36210;1.695;47.2156
+36218;Sougé;36500;1.4844;46.9669
+36219;Tendu;36200;1.5662;46.6527
+36220;Thenay;36800;1.4246;46.5974
+36221;Thevet-Saint-Julien;36400;2.0678;46.6333
+36222;Thizay;36100;1.9284;46.8999
+36223;Tilly;36310;1.2105;46.4063
+36224;Tournon-Saint-Martin;36220;0.9814;46.7321
+36225;Le Tranger;36700;1.2422;46.9725
+36226;Tranzault;36230;1.8493;46.6217
+36227;Urciers;36160;2.1478;46.5298
+36228;Valençay;36600;1.5545;47.1544
+36229;Val-Fouzon;36210;1.6249;47.2063
+36230;Vatan;36150;1.825;47.0531
+36231;Velles;36330;1.6375;46.7001
+36232;Vendœuvres;36500;1.3649;46.7881
+36233;La Vernelle;36600;1.562;47.2419
+36234;Verneuil-sur-Igneraie;36400;2.0137;46.6591
+36235;Veuil;36600;1.5084;47.1367
+36236;Vicq-Exemplet;36400;2.1427;46.6221
+36237;Vicq-sur-Nahon;36600;1.5472;47.0978
+36238;Vigoulant;36160;2.0841;46.4392
+36239;Vigoux;36170;1.4686;46.5136
+36240;Vijon;36160;2.1245;46.4349
+36241;Villedieu-sur-Indre;36320;1.5177;46.834
+36242;Villegongis;36110;1.5923;46.9206
+36243;Villegouin;36500;1.3523;46.9737
+36244;Villentrois-Faverolles-en-Berry;36360|36600;1.4223;47.1769
+36246;Villiers;36290;1.2039;46.8823
+36247;Vineuil;36110;1.6505;46.909
+36248;Vouillon;36100;1.9124;46.8194
+18001;Achères;18250;2.4601;47.2828
+18002;Ainay-le-Vieil;18200;2.5413;46.6573
+18003;Les Aix-d'Angillon;18220;2.5625;47.193
+18004;Allogny;18110;2.3111;47.2378
+18005;Allouis;18500;2.2379;47.1792
+18006;Annoix;18340;2.545;46.9712
+18007;Apremont-sur-Allier;18150;3.0189;46.9092
+18008;Arçay;18340;2.3365;46.9638
+18009;Arcomps;18200;2.4197;46.6743
+18010;Ardenais;18170;2.3487;46.6471
+18011;Argent-sur-Sauldre;18410;2.4223;47.5625
+18012;Argenvières;18140;2.9929;47.1406
+18013;Arpheuilles;18200;2.5726;46.7887
+18014;Assigny;18260;2.7495;47.4327
+18015;Aubigny-sur-Nère;18700;2.4209;47.4857
+18016;Aubinges;18220;2.5893;47.2202
+18017;Augy-sur-Aubois;18600;2.8591;46.7788
+18018;Avord;18520;2.6635;47.0313
+18019;Azy;18220;2.7099;47.1937
+18020;Bannay;18300;2.8769;47.3816
+18021;Bannegon;18210;2.7229;46.806
+18022;Barlieu;18260;2.6236;47.4937
+18023;Baugy;18800;2.7461;47.0574
+18024;Beddes;18370;2.2168;46.6078
+18025;Beffes;18320;2.9991;47.0931
+18026;Belleville-sur-Loire;18240;2.8387;47.4992
+18027;Bengy-sur-Craon;18520;2.725;46.9987
+18028;Berry-Bouy;18500;2.2903;47.1321
+18029;Bessais-le-Fromental;18210;2.781;46.7508
+18030;Blancafort;18410;2.5423;47.5362
+18031;Blet;18350;2.7292;46.8839
+18032;Boulleret;18240;2.8825;47.4309
+18033;Bourges;18000;2.3983;47.078
+18034;Bouzais;18200;2.4684;46.7045
+18035;Brécy;18220;2.6316;47.1292
+18036;Brinay;18120;2.1149;47.1668
+18037;Brinon-sur-Sauldre;18410;2.2135;47.5581
+18038;Bruère-Allichamps;18200;2.4274;46.7737
+18039;Bué;18300;2.7938;47.3082
+18040;Bussy;18130;2.6223;46.9001
+18041;La Celette;18360;2.5272;46.6363
+18042;La Celle;18200;2.4577;46.7676
+18043;La Celle-Condé;18160;2.181;46.7873
+18044;Cerbois;18120;2.1085;47.1147
+18045;Chalivoy-Milon;18130;2.6925;46.858
+18046;Chambon;18190;2.3377;46.7794
+18047;La Chapelle-d'Angillon;18380;2.4416;47.3705
+18048;La Chapelle-Hugon;18150;2.9502;46.8921
+18049;La Chapelle-Montlinard;18140;2.9855;47.1807
+18050;La Chapelle-Saint-Ursin;18570;2.3211;47.0546
+18051;La Chapelotte;18250;2.6029;47.331
+18052;Charenton-du-Cher;18210;2.6582;46.741
+18053;Charentonnay;18140;2.8702;47.1455
+18054;Charly;18350;2.7581;46.9049
+18055;Chârost;18290;2.1248;46.9949
+18056;Chassy;18800;2.8343;47.0447
+18057;Châteaumeillant;18370;2.2122;46.5537
+18058;Châteauneuf-sur-Cher;18190;2.3394;46.8681
+18059;Le Châtelet;18170;2.2942;46.6265
+18060;Chaumont;18350;2.7529;46.8431
+18061;Chaumoux-Marcilly;18140;2.7817;47.1437
+18062;Le Chautay;18150;2.9639;46.9855
+18063;Chavannes;18190;2.3995;46.865
+18064;Chéry;18120;2.0268;47.1159
+18065;Chezal-Benoît;18160;2.1008;46.8357
+18066;Civray;18290;2.1837;46.9792
+18067;Clémont;18410;2.3415;47.5693
+18068;Cogny;18130;2.6501;46.8498
+18069;Colombiers;18200;2.5584;46.6983
+18070;Concressault;18260;2.5697;47.4926
+18071;Contres;18130;2.4956;46.8603
+18072;Cornusse;18350;2.7303;46.9555
+18073;Corquoy;18190|18340;2.3189;46.9
+18074;Couargues;18300;2.9321;47.2864
+18075;Cours-les-Barres;18320;3.0325;47.0227
+18076;Coust;18210;2.5956;46.685
+18077;Couy;18140;2.8286;47.1087
+18078;Crézançay-sur-Cher;18190;2.3413;46.814
+18079;Crézancy-en-Sancerre;18300;2.7462;47.3043
+18080;Croisy;18350;2.8287;46.9293
+18081;Crosses;18340;2.5669;47.0071
+18082;Cuffy;18150;3.0372;46.974
+18083;Culan;18270;2.3534;46.5419
+18084;Dampierre-en-Crot;18260;2.5797;47.4523
+18085;Dampierre-en-Graçay;18310;1.9429;47.182
+18086;Drevant;18200;2.5242;46.6977
+18087;Dun-sur-Auron;18130;2.5538;46.8918
+18088;Ennordres;18380;2.4211;47.4204
+18089;Épineuil-le-Fleuriel;18360;2.5514;46.5738
+18090;Étréchy;18800;2.7098;47.1621
+18091;Farges-Allichamps;18200;2.4089;46.7601
+18092;Farges-en-Septaine;18800;2.639;47.0682
+18093;Faverdines;18360;2.4627;46.6337
+18094;Feux;18300;2.8621;47.2271
+18095;Flavigny;18350;2.8026;46.9637
+18096;Foëcy;18500;2.153;47.1804
+18097;Fussy;18110;2.427;47.1436
+18098;Gardefort;18300;2.8205;47.2585
+18099;Garigny;18140;2.8826;47.0896
+18100;Genouilly;18310;1.8857;47.1911
+18101;Germigny-l'Exempt;18150;2.8782;46.9128
+18102;Givardon;18600;2.8031;46.8341
+18103;Graçay;18310;1.8517;47.1392
+18104;Groises;18140;2.8078;47.2088
+18105;Gron;18800;2.7375;47.1178
+18106;Grossouvre;18600;2.9399;46.8741
+18107;La Groutte;18200;2.5117;46.6891
+18108;La Guerche-sur-l'Aubois;18150;2.945;46.9528
+18109;Henrichemont;18250;2.5376;47.3
+18110;Herry;18140;2.9409;47.2285
+18111;Humbligny;18250;2.6457;47.2637
+18112;Ids-Saint-Roch;18170;2.2558;46.7153
+18113;Ignol;18350;2.8605;46.9609
+18114;Ineuil;18160;2.2737;46.7712
+18115;Ivoy-le-Pré;18380;2.5187;47.3576
+18116;Jalognes;18300;2.7795;47.228
+18117;Jars;18260;2.6647;47.3947
+18118;Jouet-sur-l'Aubois;18320;3.0061;47.0454
+18119;Jussy-Champagne;18130;2.6484;46.9886
+18120;Jussy-le-Chaudrier;18140;2.934;47.1181
+18121;Lantan;18130;2.6589;46.9035
+18122;Lapan;18340;2.288;46.921
+18124;Lazenay;18120;2.0805;47.0771
+18125;Léré;18240;2.8716;47.4646
+18126;Levet;18340;2.3913;46.9278
+18127;Lignières;18160;2.2035;46.7606
+18128;Limeux;18120;2.1188;47.0745
+18129;Lissay-Lochy;18340;2.3915;46.975
+18130;Loye-sur-Arnon;18170;2.402;46.6338
+18132;Lugny-Champagne;18140;2.8298;47.1764
+18133;Lunery;18400;2.2587;46.9352
+18134;Lury-sur-Arnon;18120;2.0652;47.1321
+18135;Maisonnais;18170;2.2251;46.6484
+18136;Marçais;18170;2.3519;46.7024
+18137;Mareuil-sur-Arnon;18290;2.1606;46.8766
+18138;Marmagne;18500;2.2759;47.0933
+18139;Marseilles-lès-Aubigny;18320;2.9895;47.07
+18140;Massay;18120;1.9866;47.1564
+18141;Mehun-sur-Yèvre;18500;2.225;47.1316
+18142;Meillant;18200;2.506;46.7897
+18143;Menetou-Couture;18320;2.9368;47.0361
+18144;Menetou-Râtel;18300;2.7518;47.3491
+18145;Menetou-Salon;18510;2.4874;47.2436
+18146;Ménétréol-sous-Sancerre;18300;2.8702;47.3194
+18147;Ménétréol-sur-Sauldre;18700;2.2965;47.4532
+18148;Méreau;18120;2.0548;47.1804
+18149;Méry-ès-Bois;18380;2.3817;47.3047
+18150;Méry-sur-Cher;18100;1.9924;47.2483
+18151;Montigny;18250;2.6871;47.231
+18152;Montlouis;18160;2.2455;46.8078
+18153;Morlac;18170;2.3218;46.7228
+18154;Mornay-Berry;18350;2.8636;47.0552
+18155;Mornay-sur-Allier;18600;3.0084;46.816
+18156;Morogues;18220;2.5953;47.255
+18157;Morthomiers;18570;2.2705;47.0407
+18158;Moulins-sur-Yèvre;18390;2.5259;47.0958
+18159;Nançay;18330;2.1768;47.369
+18160;Nérondes;18350;2.8363;47.0066
+18161;Neuilly-en-Dun;18600;2.7837;46.8021
+18162;Neuilly-en-Sancerre;18250;2.6571;47.3086
+18163;Neuvy-Deux-Clochers;18250;2.6721;47.2813
+18164;Neuvy-le-Barrois;18600;3.0154;46.8627
+18165;Neuvy-sur-Barangeon;18330;2.2558;47.3259
+18166;Nohant-en-Goût;18390;2.5838;47.0902
+18167;Nohant-en-Graçay;18310;1.9135;47.1338
+18168;Le Noyer;18260;2.6642;47.3688
+18169;Nozières;18200;2.425;46.7366
+18170;Oizon;18700;2.5084;47.448
+18171;Orcenais;18200;2.4155;46.7093
+18172;Orval;18200;2.4676;46.723
+18173;Osmery;18130|18350;2.6698;46.9385
+18174;Osmoy;18390;2.5094;47.063
+18175;Ourouer-les-Bourdelins;18350;2.7915;46.9175
+18176;Parassy;18220;2.539;47.2399
+18177;Parnay;18130;2.5559;46.8537
+18178;La Perche;18200;2.5751;46.6309
+18179;Pigny;18110;2.4446;47.1633
+18180;Plaimpied-Givaudins;18340;2.445;47.0116
+18181;Plou;18290;2.144;47.0357
+18182;Poisieux;18290;2.0854;47.0289
+18183;Le Pondy;18210;2.6422;46.8009
+18184;Précy;18140;2.9353;47.0927
+18185;Presly;18380;2.3242;47.3882
+18186;Preuilly;18120;2.1637;47.0965
+18187;Préveranges;18370;2.2512;46.456
+18188;Primelles;18400;2.2076;46.9077
+18189;Quantilly;18110;2.4462;47.2309
+18190;Quincy;18120;2.1581;47.1289
+18191;Raymond;18130;2.6898;46.9704
+18192;Reigny;18270;2.3388;46.5875
+18193;Rezay;18170;2.1716;46.6713
+18194;Rians;18220;2.6203;47.1864
+18195;Sagonne;18600;2.8253;46.8599
+18196;Saint-Aignan-des-Noyers;18600;2.8187;46.7544
+18197;Saint-Amand-Montrond;18200;2.5167;46.7236
+18198;Saint-Ambroix;18290;2.1274;46.9323
+18199;Saint-Baudel;18160;2.202;46.8529
+18200;Saint-Bouize;18300;2.8959;47.2708
+18201;Saint-Caprais;18400;2.2917;46.9671
+18202;Saint-Céols;18220;2.6373;47.2185
+18203;Saint-Christophe-le-Chaudry;18270;2.3934;46.5878
+18204;Saint-Denis-de-Palin;18130;2.5214;46.9394
+18205;Saint-Doulchard;18230;2.3554;47.1116
+18206;Saint-Éloy-de-Gy;18110;2.3273;47.1671
+18207;Saint-Florent-sur-Cher;18400;2.2537;46.9921
+18208;Sainte-Gemme-en-Sancerrois;18240;2.819;47.4031
+18209;Saint-Georges-de-Poisieux;18200;2.4808;46.6838
+18210;Saint-Georges-sur-la-Prée;18100;1.9492;47.2181
+18211;Saint-Georges-sur-Moulon;18110;2.4162;47.1837
+18212;Saint-Germain-des-Bois;18340;2.4496;46.8858
+18213;Saint-Germain-du-Puy;18390;2.4817;47.1102
+18214;Saint-Hilaire-de-Court;18100;1.9995;47.2048
+18215;Saint-Hilaire-de-Gondilly;18320|18350;2.9065;47.029
+18216;Saint-Hilaire-en-Lignières;18160;2.1273;46.7451
+18217;Saint-Jeanvrin;18370;2.2396;46.6004
+18218;Saint-Just;18340;2.501;46.9884
+18219;Saint-Laurent;18330;2.1855;47.2434
+18220;Saint-Léger-le-Petit;18140;2.9986;47.1151
+18221;Saint-Loup-des-Chaumes;18190;2.3783;46.8246
+18223;Saint-Martin-d'Auxigny;18110;2.3843;47.2164
+18224;Saint-Martin-des-Champs;18140;2.9339;47.1717
+18225;Saint-Maur;18270;2.2864;46.5678
+18226;Saint-Michel-de-Volangis;18390;2.4812;47.1406
+18227;Sainte-Montaine;18700;2.3249;47.5026
+18228;Saint-Outrille;18310;1.8095;47.1414
+18229;Saint-Palais;18110;2.4064;47.2476
+18230;Saint-Pierre-les-Bois;18170;2.2822;46.672
+18231;Saint-Pierre-les-Étieux;18210;2.5944;46.738
+18232;Saint-Priest-la-Marche;18370;2.184;46.4515
+18233;Saint-Satur;18300;2.8559;47.3491
+18234;Saint-Saturnin;18370;2.2418;46.5074
+18235;Sainte-Solange;18220;2.5516;47.1427
+18236;Saint-Symphorien;18190;2.3044;46.8078
+18237;Sainte-Thorette;18500;2.2121;47.0809
+18238;Saint-Vitte;18360;2.5292;46.5395
+18240;Sancergues;18140;2.9047;47.1624
+18241;Sancerre;18300;2.822;47.3248
+18242;Sancoins;18600;2.9095;46.8184
+18243;Santranges;18240;2.7635;47.5061
+18244;Saugy;18290;2.111;46.9668
+18245;Saulzais-le-Potier;18360;2.4872;46.5988
+18246;Savigny-en-Sancerre;18240;2.7963;47.4423
+18247;Savigny-en-Septaine;18390;2.5652;47.0466
+18248;Senneçay;18340;2.4436;46.9467
+18249;Sens-Beaujeu;18300;2.6833;47.337
+18250;Serruelles;18190;2.3828;46.8809
+18251;Sévry;18140;2.822;47.1384
+18252;Sidiailles;18270;2.3223;46.5093
+18253;Soulangis;18220;2.5162;47.1788
+18254;Soye-en-Septaine;18340;2.4906;47.0328
+18255;Le Subdray;18570;2.3039;47.0187
+18256;Subligny;18260;2.7531;47.395
+18257;Sury-près-Léré;18240;2.8427;47.485
+18258;Sury-en-Vaux;18300;2.797;47.3713
+18259;Sury-ès-Bois;18260;2.7114;47.4611
+18260;Tendron;18350;2.8189;46.9804
+18261;Thaumiers;18210;2.6625;46.8185
+18262;Thauvenay;18300;2.8785;47.2982
+18263;Thénioux;18100;1.934;47.2652
+18264;Thou;18260;2.6713;47.4222
+18265;Torteron;18320;2.9883;47.009
+18266;Touchay;18160;2.2082;46.7153
+18267;Trouy;18570;2.3618;47.0273
+18268;Uzay-le-Venon;18190;2.4705;46.8229
+18269;Vailly-sur-Sauldre;18260;2.6461;47.457
+18270;Vallenay;18190;2.3819;46.7664
+18271;Vasselay;18110;2.3886;47.1577
+18272;Veaugues;18300;2.7535;47.2662
+18273;Venesmes;18190;2.2887;46.8496
+18274;Verdigny;18300;2.8089;47.3493
+18275;Vereaux;18600;2.8661;46.8709
+18276;Vernais;18210;2.712;46.7681
+18277;Verneuil;18210;2.5992;46.8227
+18278;Vesdun;18360;2.4345;46.5594
+18279;Vierzon;18100;2.0776;47.2351
+18280;Vignoux-sous-les-Aix;18110;2.4683;47.1836
+18281;Vignoux-sur-Barangeon;18500;2.1898;47.2105
+18282;Villabon;18800;2.68;47.108
+18283;Villecelin;18160;2.1992;46.8251
+18284;Villegenon;18260;2.5971;47.4175
+18285;Villeneuve-sur-Cher;18400;2.2227;47.0285
+18286;Villequiers;18800;2.7954;47.0794
+18287;Vinon;18300;2.8331;47.2788
+18288;Vorly;18340;2.4767;46.9409
+18289;Vornay;18130;2.5934;46.9682
+18290;Vouzeron;18330;2.2106;47.2701
+</script>
+<script>
+"use strict";
+/* ======================================================================
+   RÉFÉRENTIELS — repris de l'onglet « Listes » du fichier Excel
+   (valeurs exactes, pour que le tableau de bord les compte)
+   ====================================================================== */
+const SR = {
+  CHR:["CBRc – Champagne berrichonne (Cher)","SLG – Sologne","SPF – Sancerrois-Pays-Fort","VLR – Val de Loire","VDG – Vallée de Germigny","SAD – Saint-Amandois","PDB – Pays de Bourges","LMC – La Marche"],
+  IND:["BRN – Brenne (Indre)","BSH – Boischaut (Indre)","CBRi – Champagne berrichonne (Indre)"]
+};
+const srCode = v => (v||"").split(" –")[0];
+const srDept = v => SR.IND.includes(v) ? "IND" : (SR.CHR.includes(v) ? "CHR" : "");
+const SR_CODES = [...SR.CHR, ...SR.IND].map(srCode).concat(["Indéterminée"]);
+const OPTS = {
+  SOUS_REGION_CODE: [...SR.CHR, ...SR.IND],
+  TYPE_MEUBLE:["Armoire","Bahut","Banc","Blutoir","Bonnetière","Buffet","Buffet à 2 corps","Coffre","Commode","Horloge","Lit","Pétrin","Siège","Table","Vaisselier","Autre (préciser)"],
+  proprioType:["Particulier","Organisme / entreprise"],
+  essences:["Chêne","Noyer","Merisier","Châtaignier","Frêne","Orme","Peuplier","Indéterminée","Autre"],
+  ORIGINE_BOIS:["Local (Berry)","Importé","Indéterminé","Autre"],
+  TECHNIQUE_CONSTRUCTION:["Tenon-mortaise","Queue d'aronde","Panneau flottant","Autre"],
+  ETAT_CONSERVATION:["1 – Très mauvais","2 – Mauvais","3 – Moyen","4 – Bon","5 – Excellent"],
+  DEGRE_AUTHENTICITE:["Original","Restauration partielle","Restauration majeure","Copie","Indéterminé"],
+  restauPar:["Professionnelle","Amateure","Inconnue"],
+  restauPeriode:["Avant XXe","1er ¼ XXe","2e ¼ XXe","3e ¼ XXe","4e ¼ XXe","XXIe"],
+  FINITION_SURFACE:["Cire","Peinture","Vernis","Huile","Brut","Indéterminée"],
+  PERIODE_FABRICATION:["XVIIe s.","Début XVIIIe s.","Fin XVIIIe s.","XIXe s.","XXe s.","Indéterminée"],
+  STYLE_REGIONAL:["Louis XIII","Louis XIV","Louis XV","Louis XVI","Louis-Philippe","Rustique berrichon","Transition","Autre"],
+  PROVENANCE:["Héritage familial","Achat","Don","Vente aux enchères","Inconnue","Autre"],
+  INDICE_RARETE:["Commun","Peu courant","Rare","Exemplaire unique"],
+  MILIEU_SOCIAL:["Paysan / Propriétaire (laboureur, vigneron…)","Artisan","Bourgeois","Noble","Indéterminé","Autre"],
+  srOrigineIndiquee: SR_CODES, srOrigineAttestee: SR_CODES,
+  VALEUR_SYMBOLIQUE:["Meuble de mariage","Meuble de dot","Usage liturgique","Inconnue","Autre"],
+  RECITS_ORAUX:["Oui (noter ci-dessous)","Non"],
+  MARQUEUR_REGIONALITE:["0 – Aucun","1 – Probable","2 – Attesté","3 – Exemplaire"],
+  INTERET_PATRIMONIAL:["1 – Faible","2 – Limité","3 – Intéressant","4 – Important","5 – Exceptionnel"],
+  POTENTIEL_CLASSEMENT:["MH envisageable","Inventaire municipal","Aucun"]
+};
+const CHIP_LABEL = { SOUS_REGION_CODE: v => { const [c,n]=v.split(" – "); return c+" · "+n.replace(/ \((Cher|Indre)\)/,""); } };
+const MAX_MULTI = { essences:2 };
+/* « Autre » : valeur du menu → champ de précision. Les précisions déjà saisies
+   deviennent des choix réutilisables (tirés de toutes les fiches enregistrées). */
+const AUTRE = {
+  TYPE_MEUBLE:["Autre (préciser)","typeAutre","type"], essences:["Autre","essenceAutre","essence"], ORIGINE_BOIS:["Autre","origineAutre","origine du bois"],
+  TECHNIQUE_CONSTRUCTION:["Autre","techniqueAutre","technique"], STYLE_REGIONAL:["Autre","styleAutre","style"], PROVENANCE:["Autre","provenanceAutre","provenance"],
+  MILIEU_SOCIAL:["Autre","milieuAutre","milieu social"], VALEUR_SYMBOLIQUE:["Autre","valeurAutre","valeur symbolique"]
+};
+const isAutre = (f,k) => { const v=f[k], a=AUTRE[k][0]; return Array.isArray(v) ? v.includes(a) : v===a; };
+const norm = t => (t||"").trim().replace(/\s+/g," ");
+function learned(k){
+  const [,p]=AUTRE[k], cnt=new Map();
+  for(const f of allFiches()){ if(f.docId===(cur&&cur.docId)) continue; const t=norm(f[p]); if(t && isAutre(f,k)){ const key=t.toLowerCase(); const e=cnt.get(key)||{t,n:0}; e.n++; cnt.set(key,e); } }
+  return [...cnt.values()].sort((a,b)=>b.n-a.n||a.t.localeCompare(b.t,"fr")).map(e=>e.t);
+}
+// insère sous chaque menu concerné un bloc « Préciser » (avant le branchement des écouteurs)
+for(const [k,[,p,lab]] of Object.entries(AUTRE)){
+  const box=document.querySelector(`[data-chips="${k}"]`); if(!box) continue;
+  const d=document.createElement("div"); d.className="f autre hidden"; d.dataset.autre=k; d.dataset.req=p;
+  d.innerHTML=`<label class="lbl req" for="in-${p}">Préciser (${lab})</label><input type="text" id="in-${p}" data-k="${p}" list="dl-${p}" placeholder="Saisir une fois, réutilisable ensuite"><datalist id="dl-${p}"></datalist><p class="hint">Sera proposé comme choix sur les prochaines fiches.</p>`;
+  box.after(d);
+}
+const AUTH_ITEMS = [["identite","Identité du propriétaire"],["commune","Commune du lieu de conservation"],["adresse","Adresse complète du lieu de conservation"],["photos","Photos"],["refs","Références documentaires"],["parties25","Parties 2 à 5 de la fiche"]];
+const LEGENDES = ["Vue générale de face","Profil gauche","Profil droit","Verso","Intérieur","Détails décoratifs","Assemblages / techniques","Signatures / estampilles","Autre"];
+const PHOTO_TODO = LEGENDES.slice(0,8);
+
+/* ---------- utilitaires ---------- */
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const today = () => { const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); };
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+const frDate = iso => iso ? iso.split("-").reverse().join("/") : "";
+const lsGet = k => { try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const lsSet = (k,v) => { try{ localStorage.setItem(k,v); }catch(e){} };
+let toastT;
+function toast(msg, ms=2600){ const t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),ms); }
+function setStatus(text, cls=""){ const s=$("#status"); s.textContent=text; s.className="pill "+cls; }
+
+function yearOf(f){ return (f.DATE_COLLECTE||"").slice(0,4); }
+function codeOf(f){
+  const d=srDept(f.SOUS_REGION_CODE), c=srCode(f.SOUS_REGION_CODE), y=yearOf(f), n=f.NUM_SEQ;
+  if(!d||!c||!y||!n) return "";
+  return `BERRY-${d}-${c}-${y}-${String(n).padStart(4,"0")}`;
+}
+function authLevel(a){ const v=AUTH_ITEMS.map(([k])=>!!(a||{})[k]); return v.every(Boolean)?"Oui":(v.some(Boolean)?"Partielle":"Non"); }
+function initials(name){ return (name||"").trim().split(/[\s-]+/).filter(Boolean).map(w=>w[0].toUpperCase()+".").join(""); }
+function typeLabel(f){ return f.TYPE_MEUBLE==="Autre (préciser)" ? (f.typeAutre||f.typeSpec||"Autre") : (f.TYPE_MEUBLE||"Type ?"); }
+
+/* ---------- IndexedDB : brouillon + fiches en attente ---------- */
+let idb=null;
+function openIdb(){ return new Promise(res=>{ try{ const r=indexedDB.open("inventaire-berry-gh",1);
+  r.onupgradeneeded=()=>{ const d=r.result; d.createObjectStore("outbox",{keyPath:"docId"}); d.createObjectStore("draft"); d.createObjectStore("ghjson"); d.createObjectStore("files"); };
+  r.onsuccess=()=>res(r.result); r.onerror=()=>res(null); }catch(e){ res(null); } }); }
+function idbOp(store, mode, fn){ return new Promise((res,rej)=>{ if(!idb) return res(undefined);
+  try{ const tx=idb.transaction(store,mode); const r=fn(tx.objectStore(store));
+    tx.oncomplete=()=>res(r && "result" in r ? r.result : undefined); tx.onerror=()=>rej(tx.error); }catch(e){ rej(e); } }); }
+const outboxAll=()=>idbOp("outbox","readonly",s=>s.getAll()).then(v=>v||[]).catch(()=>[]);
+const outboxPut=e=>idbOp("outbox","readwrite",s=>s.put(e));
+const outboxDel=id=>idbOp("outbox","readwrite",s=>s.delete(id));
+const draftGet=()=>idbOp("draft","readonly",s=>s.get("current")).catch(()=>undefined);
+const draftPut=d=>idbOp("draft","readwrite",s=>s.put(d,"current")).catch(()=>{});
+const draftDel=()=>idbOp("draft","readwrite",s=>s.delete("current")).catch(()=>{});
+
+/* ---------- état ---------- */
+let dict=null;
+let fiches=new Map(), outbox=[], cur=null, removedAssets=[], dirty=false, lastExport=null;
+const blobUrls=new Map();
+function blobUrl(b){ if(!blobUrls.has(b)) blobUrls.set(b, URL.createObjectURL(b)); return blobUrls.get(b); }
+
+function allFiches(){
+  const m=new Map(fiches); for(const e of outbox) m.set(e.docId,{...e.fiche,_pending:true});
+  return [...m.entries()].map(([docId,f])=>({docId,...f}));
+}
+function nextSeq(sr, year, exceptId){
+  let mx=0; for(const f of allFiches()) if(f.docId!==exceptId && f.SOUS_REGION_CODE===sr && yearOf(f)===year) mx=Math.max(mx, Number(f.NUM_SEQ)||0);
+  return mx+1;
+}
+function missingFields(f){
+  const m=[];
+  if(!f.DATE_COLLECTE) m.push(["DATE_COLLECTE","Date de collecte"]);
+  if(!f.COLLECTEUR) m.push(["COLLECTEUR","Collecteur"]);
+  if(!f.SOUS_REGION_CODE) m.push(["SOUS_REGION_CODE","Sous-région"]);
+  if(!f.TYPE_MEUBLE) m.push(["TYPE_MEUBLE","Type de meuble"]);
+  for(const [k,[,p,lab]] of Object.entries(AUTRE)) if(isAutre(f,k) && !norm(f[p])) m.push([p,`Précision « Autre » (${lab})`]);
+  if(["Rare","Exemplaire unique"].includes(f.INDICE_RARETE) && !f.rareteArg) m.push(["rareteArg","Argumentation de la rareté"]);
+  if(/^[45]/.test(f.INTERET_PATRIMONIAL||"") && !f.JUSTIFICATION_NOTE) m.push(["JUSTIFICATION_NOTE","Justification (intérêt ≥ 4)"]);
+  if(f.RECITS_ORAUX==="Oui (noter ci-dessous)" && !f.RESUME_RECIT_ORAL) m.push(["RESUME_RECIT_ORAL","Résumé du récit oral"]);
+  return m;
+}
+
+/* ---------- liste ---------- */
+function renderList(){ renderAll(); }
+function renderListView(){
+  const q=$("#q").value.trim().toLowerCase(), ft=$("#fType").value, todo=$("#fTodo").checked;
+  const items=allFiches().sort((a,b)=>(codeOf(b)||"").localeCompare(codeOf(a)||"") || (b.updatedAt||"").localeCompare(a.updatedAt||""));
+  const codes={}; items.forEach(f=>{ const c=codeOf(f); if(c) codes[c]=(codes[c]||0)+1; });
+  const shown=items.filter(f=>{
+    if(ft && f.TYPE_MEUBLE!==ft) return false; if(todo && !missingFields(f).length) return false; if(!q) return true;
+    return [codeOf(f),f.TYPE_MEUBLE,f.typeSpec,f.typeAutre,f.PROPRIETAIRE,f.commune,f.lieudit,f.cp,f.STYLE_REGIONAL,f.SOUS_REGION_CODE,(f.essences||[]).join(" ")].join(" ").toLowerCase().includes(q);
+  });
+  const owners=new Set(items.map(f=>(f.PROPRIETAIRE||"").trim().toLowerCase()).filter(Boolean));
+  $("#count").textContent = items.length ? `${shown.length} fiche${shown.length>1?"s":""}${shown.length!==items.length?" sur "+items.length:""} · ${owners.size} propriétaire${owners.size>1?"s":""}` : "";
+  $("#empty").classList.toggle("hidden", items.length>0);
+  $("#cards").innerHTML = shown.map(f=>{
+    const ph0=(f.photos||[])[0]; const c=codeOf(f); const miss=missingFields(f).length;
+    const sub=[f.STYLE_REGIONAL, f.PERIODE_FABRICATION, f.PROPRIETAIRE && (f.PROPRIETAIRE+([f.lieudit,f.commune].filter(Boolean).length?" — "+[f.lieudit,f.commune].filter(Boolean).join(", "):""))].filter(Boolean).join(" · ");
+    return `<button class="card" data-id="${esc(f.docId)}">
+      <div class="th">${ph0?`<img ${imgAttr(ph0)} alt="" loading="lazy">`:icon(f.TYPE_MEUBLE)}</div>
+      <div class="bd"><span class="code">${esc(c||"Code incomplet")}</span>
+      <div class="t"><span>${esc(typeLabel(f))}</span>${f._pending?'<span class="pill warn">en attente</span>':""}${miss?`<span class="pill warn">à compléter</span>`:""}${c&&codes[c]>1?'<span class="pill bad">code en double</span>':""}</div>
+      <div class="s">${esc(sub||"—")}</div><div class="s">${(f.photos||[]).length} photo${(f.photos||[]).length>1?"s":""} · ${esc(frDate(f.DATE_COLLECTE))} · autorisation ${authLevel(f.auth).toLowerCase()}${f.signature?" signée":""}</div></div></button>`;
+  }).join("");
+}
+$("#cards").addEventListener("click",e=>{ const c=e.target.closest(".card"); if(c) openFiche(c.dataset.id); });
+$("#q").addEventListener("input",renderList);
+$("#fType").addEventListener("change",renderList);
+$("#fTodo").addEventListener("change",renderList);
+$("#fType").innerHTML+=OPTS.TYPE_MEUBLE.map(t=>`<option>${esc(t)}</option>`).join("");
+
+function renderOutbox(){
+  const n=outbox.length; $("#outboxBanner").classList.toggle("hidden",n===0);
+  $("#outboxText").textContent=`${n} fiche${n>1?"s":""} gardée${n>1?"s":""} sur cet appareil, en attente d'envoi.`;
+}
+function renderExportBanner(){
+  $("#exportBanner").classList.add("hidden"); // l'historique GitHub tient lieu de sauvegarde
+  $("#ghBanner").classList.toggle("hidden", ghReady());
+}
+$("#exportNow").addEventListener("click",()=>openExport());
+
+/* ---------- formulaire ---------- */
+function blankFiche(base={}){
+  return { v:2, DATE_COLLECTE:today(), COLLECTEUR: lsGet("collecteur")||"", SOUS_REGION_CODE:"", NUM_SEQ:0,
+    auth:{commune:true, photos:true}, signature:null, PROPRIETAIRE:"", proprioType:"Particulier", tel:"", email:"", commune:"", insee:"", cp:"", lieudit:"", adresse:"", gps:"",
+    REFS_DOCUMENTAIRES:"", TYPE_MEUBLE:"", typeSpec:"", typeAutre:"", LONGUEUR_CM:"", LARGEUR_CM:"", HAUTEUR_CM:"", essences:[], essenceAutre:"",
+    ORIGINE_BOIS:"", origineAutre:"", TECHNIQUE_CONSTRUCTION:"", techniqueAutre:"", ETAT_CONSERVATION:"", DEGRE_AUTHENTICITE:"", restauPar:"", restauPeriode:"", restauPrecisions:"",
+    ELEMENTS_DECORATIFS:"", FINITION_SURFACE:"", SIGNATURE_ESTAMPILLE:"", PERIODE_FABRICATION:"", decennie:"", STYLE_REGIONAL:"", styleAutre:"",
+    FILIATION_TYPOLOGIQUE:"", PROVENANCE:"", provenanceAutre:"", FONCTION_ORIGINE:"", FONCTION_ACTUELLE:"", INDICE_RARETE:"", rareteArg:"",
+    MILIEU_SOCIAL:"", milieuAutre:"", EMPLACEMENT_ORIGINE:"", EMPLACEMENT_ACTUEL:"", srOrigineIndiquee:"", srOrigineAttestee:"", TRANSMISSION_INTERGENE:"",
+    VALEUR_SYMBOLIQUE:"", valeurAutre:"", RECITS_ORAUX:"", RESUME_RECIT_ORAL:"", MARQUEUR_REGIONALITE:"", INTERET_PATRIMONIAL:"", POTENTIEL_CLASSEMENT:"",
+    JUSTIFICATION_NOTE:"", AUTRES_REMARQUES:"", photos:[], ...base };
+}
+function renderChips(){
+  $$("[data-chips]").forEach(box=>{
+    const k=box.dataset.chips, multi=Array.isArray(cur[k]);
+    let opts=OPTS[k]; if(box.dataset.sub) opts=SR[box.dataset.sub];
+    const au=AUTRE[k], prec = au ? norm(cur[au[1]]) : "", learnedList = au ? learned(k) : [];
+    const precLearned = au && learnedList.some(t=>t.toLowerCase()===prec.toLowerCase());
+    box.innerHTML=opts.map(o=>{
+      const idx = multi ? (cur[k]||[]).indexOf(o) : -1; let on = multi ? idx>=0 : cur[k]===o;
+      if(au && o===au[0] && precLearned) on=false; // la précision est affichée par son propre choix
+      const lab = CHIP_LABEL[k] ? CHIP_LABEL[k](o) : o;
+      return `<button type="button" class="chip${on?" on":""}" data-v="${esc(o)}">${esc(lab)}${multi&&on&&MAX_MULTI[k]>1?`<i>${idx+1}</i>`:""}</button>`;
+    }).join("") + (au ? learnedList.map(t=>{
+      const on = isAutre(cur,k) && prec.toLowerCase()===t.toLowerCase(); const idx = multi ? (cur[k]||[]).indexOf(au[0]) : -1;
+      return `<button type="button" class="chip learned${on?" on":""}" data-learned="${esc(t)}" title="Précision « Autre » déjà utilisée">${esc(t)}${multi&&on&&MAX_MULTI[k]>1?`<i>${idx+1}</i>`:""}</button>`;
+    }).join("") : "");
+    if(au){
+      const blk=document.querySelector(`[data-autre="${k}"]`); blk.classList.toggle("hidden", !isAutre(cur,k));
+      blk.querySelector("datalist").innerHTML=learnedList.map(t=>`<option value="${esc(t)}">`).join("");
+    }
+  });
+  // champs conditionnels
+  $$("[data-if]").forEach(el=>{
+    const m=el.dataset.if.match(/^(\w+)(!?=)(.*)$/); const [,k,op,vals]=m; const list=vals.split("|");
+    const v=cur[k]; const hit = Array.isArray(v) ? v.some(x=>list.includes(x)) : list.includes(v);
+    const show = op==="=" ? hit : (!hit);
+    el.classList.toggle("hidden", !show);
+    el.querySelectorAll("[data-k]").forEach(i=>i.disabled=!show);
+  });
+  const just = /^[45]/.test(cur.INTERET_PATRIMONIAL||"");
+  $("#justLbl").classList.toggle("req", just);
+  updateCode(); renderMissing(false);
+}
+$$("[data-chips]").forEach(box=>box.addEventListener("click",e=>{
+  const b=e.target.closest(".chip"); if(!b) return; const k=box.dataset.chips;
+  if(b.dataset.learned!=null){
+    const [a,p]=AUTRE[k], t=b.dataset.learned, was=isAutre(cur,k) && norm(cur[p]).toLowerCase()===t.toLowerCase();
+    if(Array.isArray(cur[k])){ let arr=cur[k].filter(x=>x!==a); if(!was){ arr.push(a); const mx=MAX_MULTI[k]; if(mx&&arr.length>mx) arr=arr.slice(-mx); } cur[k]=arr; }
+    else cur[k] = was ? "" : a;
+    cur[p] = was ? "" : t; const inp=document.querySelector(`[data-autre="${k}"] input`); if(inp) inp.value=cur[p];
+    renderChips(); touch(); return;
+  }
+  const v=b.dataset.v;
+  if(AUTRE[k] && v===AUTRE[k][0]){ // « Autre » nu : on vide la précision pour en saisir une nouvelle
+    const [a,p]=AUTRE[k], learnedOn = isAutre(cur,k) && learned(k).some(t=>t.toLowerCase()===norm(cur[p]).toLowerCase());
+    if(learnedOn){ cur[p]=""; const inp=document.querySelector(`[data-autre="${k}"] input`); inp.value=""; renderChips(); touch(); setTimeout(()=>inp.focus(),50); return; }
+  }
+  if(Array.isArray(cur[k])){ let a=[...cur[k]]; if(a.includes(v)) a=a.filter(x=>x!==v); else { a.push(v); const mx=MAX_MULTI[k]; if(mx && a.length>mx) a=a.slice(-mx); } cur[k]=a; }
+  else cur[k] = cur[k]===v ? "" : v;
+  if(k==="SOUS_REGION_CODE") reseq();
+  renderChips(); touch();
+  if(AUTRE[k] && v===AUTRE[k][0] && isAutre(cur,k)){ const inp=document.querySelector(`[data-autre="${k}"] input`); if(inp && !inp.value) setTimeout(()=>inp.focus(),50); }
+}));
+$$(".autre input").forEach(inp=>inp.addEventListener("change",()=>{ cur[inp.dataset.k]=norm(inp.value); inp.value=cur[inp.dataset.k]; renderChips(); }));
+$$("[data-k]").forEach(inp=>inp.addEventListener("input",()=>{
+  const k=inp.dataset.k; cur[k]=inp.value;
+  if(k==="rareteArg") $$('[data-k="rareteArg"]').forEach(o=>{ if(o!==inp) o.value=inp.value; });
+  if(k==="DATE_COLLECTE") reseq();
+  if(k==="COLLECTEUR") lsSet("collecteur",inp.value);
+  if(k==="PROPRIETAIRE") renderAuth();
+  updateCode(); touch();
+}));
+function reseq(){
+  // numéro séquentiel par sous-région et par année (repart à 1 chaque année)
+  const keep = cur._orig && cur._orig.sr===cur.SOUS_REGION_CODE && cur._orig.y===yearOf(cur) && cur._orig.n;
+  cur.NUM_SEQ = !cur.SOUS_REGION_CODE ? 0 : (keep ? cur._orig.n : nextSeq(cur.SOUS_REGION_CODE, yearOf(cur), cur.docId));
+}
+function updateCode(){
+  const c=codeOf(cur); $("#codeOut").textContent = c || "BERRY-…-…-"+(yearOf(cur)||"AAAA")+"-…";
+  $("#seqInfo").textContent = c ? "" : "choisir la sous-région";
+  $("#hTitle").firstChild.textContent = c ? typeLabel(cur) : (cur.docId ? "Fiche" : "Nouvelle fiche");
+}
+function renderMissing(strict){
+  const miss=new Set(missingFields(cur).map(m=>m[0]));
+  $$("[data-req]").forEach(el=>el.classList.toggle("missing", (strict||el.classList.contains("missing")) && miss.has(el.dataset.req) && !el.classList.contains("hidden")));
+}
+function fillForm(){
+  $$("[data-k]").forEach(inp=>{ inp.value = cur[inp.dataset.k] ?? ""; });
+  $$(".missing").forEach(e=>e.classList.remove("missing"));
+  renderAuth(); renderChips(); renderPhotos(); sigLoad(); renderCommuneInfo(); $("#communeSugg").classList.add("hidden");
+  $("#delSec").classList.toggle("hidden",!cur.docId);
+}
+
+/* ---------- autorisation ---------- */
+function renderAuth(){
+  const a=cur.auth||{};
+  $("#authChecks").innerHTML = AUTH_ITEMS.map(([k,l])=>`<label class="check"><input type="checkbox" data-auth="${k}"${a[k]?" checked":""}> ${esc(l)}</label>`).join("");
+  const lvl=authLevel(a);
+  $("#authState").innerHTML = `Autorisation de publication : <span class="pill ${lvl==="Oui"?"ok":lvl==="Non"?"bad":"warn"}">${lvl}</span>`;
+  const who = cur.PROPRIETAIRE ? esc(cur.PROPRIETAIRE) : "……………………";
+  const col = cur.COLLECTEUR ? esc(cur.COLLECTEUR) : "le collecteur";
+  $("#legalTxt").innerHTML = `Je soussigné(e) <b>${who}</b> autorise <b>${col}</b> à exploiter et publier les informations et photographies collectées lors du présent inventaire et cochées ci-dessus, dans le cadre d'un projet universitaire.`;
+  $("#anonHint").textContent = a.identite ? "" : `Identité non autorisée : le nom sera anonymisé à l'export (${initials(cur.PROPRIETAIRE)||"initiales"}).`;
+}
+$("#authChecks").addEventListener("change",e=>{ const k=e.target.dataset.auth; if(!k) return; cur.auth={...(cur.auth||{}),[k]:e.target.checked}; renderAuth(); touch(); });
+
+/* ---------- signature ---------- */
+const cv=$("#sigCanvas"); let ctx, drawing=false, sigDirty=false;
+function sigSize(){ const r=cv.getBoundingClientRect(); if(!r.width) return; const dpr=window.devicePixelRatio||1; cv.width=r.width*dpr; cv.height=r.height*dpr; ctx=cv.getContext("2d"); ctx.scale(dpr,dpr); ctx.lineWidth=2.4; ctx.lineCap="round"; ctx.lineJoin="round"; ctx.strokeStyle="#1d1a40"; }
+function sigLoad(){
+  sigDirty=false; $("#sigWrap").querySelector("img")?.remove(); cv.classList.remove("hidden");
+  if(cur.signature){ const im=new Image(); setImg(im,cur.signature); cv.classList.add("hidden"); $("#sigWrap").appendChild(im); $("#sigPh").classList.add("hidden");
+    $("#sigInfo").textContent="Signée"+(cur.signature.date?" le "+frDate(cur.signature.date):"")+"."; }
+  else { requestAnimationFrame(()=>{ sigSize(); }); $("#sigPh").classList.remove("hidden"); $("#sigInfo").textContent=""; }
+}
+function pos(e){ const r=cv.getBoundingClientRect(); return [e.clientX-r.left, e.clientY-r.top]; }
+cv.addEventListener("pointerdown",e=>{ if(!ctx) sigSize(); drawing=true; cv.setPointerCapture(e.pointerId); const [x,y]=pos(e); ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+.1,y+.1); ctx.stroke(); $("#sigPh").classList.add("hidden"); sigDirty=true; e.preventDefault(); });
+cv.addEventListener("pointermove",e=>{ if(!drawing) return; const [x,y]=pos(e); ctx.lineTo(x,y); ctx.stroke(); e.preventDefault(); });
+const sigEnd=()=>{ if(!drawing) return; drawing=false; touch(); };
+cv.addEventListener("pointerup",sigEnd); cv.addEventListener("pointercancel",sigEnd);
+$("#sigClear").addEventListener("click",()=>{
+  if(cur.signature && cur.signature.path) removedAssets.push(cur.signature.path);
+  cur.signature=null; sigLoad(); requestAnimationFrame(()=>{ sigSize(); }); touch();
+});
+let sigBusy=null;
+function sigCommit(){
+  if(sigBusy) return sigBusy;
+  if(!sigDirty) return Promise.resolve();
+  sigDirty=false; const target=cur;
+  sigBusy=new Promise(res=>cv.toBlob(res,"image/png")).then(b=>{ if(b) target.signature={blob:b, date:today()}; }).finally(()=>{ sigBusy=null; });
+  return sigBusy;
+}
+
+/* ---------- photos ---------- */
+function renderPhotos(){
+  $("#photos").innerHTML = cur.photos.map((p,i)=>`<div class="ph" data-i="${i}">
+    <img ${imgAttr(p)} alt="" loading="lazy"><span class="n">P${String(i+1).padStart(2,"0")}</span><button type="button" class="x" aria-label="Retirer">×</button>
+    <select>${LEGENDES.map(l=>`<option${p.legende===l?" selected":""}>${esc(l)}</option>`).join("")}</select></div>`).join("");
+  const done=new Set(cur.photos.map(p=>p.legende)); const left=PHOTO_TODO.filter(l=>!done.has(l));
+  $("#photoTodo").innerHTML = left.length ? `Restent à faire : <b>${left.map(esc).join(" · ")}</b>` : "✓ Toutes les vues de la fiche sont faites.";
+}
+$("#photos").addEventListener("click",e=>{ const x=e.target.closest(".x"); if(!x) return; const i=+x.closest(".ph").dataset.i, p=cur.photos[i];
+  confirmBox("Retirer cette photo ?","","Retirer",()=>{ if(p.path) removedAssets.push(p.path); cur.photos.splice(i,1); renderPhotos(); touch(); }); });
+$("#photos").addEventListener("change",e=>{ const s=e.target.closest("select"); if(!s) return; cur.photos[+s.closest(".ph").dataset.i].legende=s.value; renderPhotos(); touch(); });
+async function shrink(file){
+  const MAX=1800;
+  try{ let src; try{ src=await createImageBitmap(file,{imageOrientation:"from-image"}); }
+    catch{ src=await new Promise((res,rej)=>{ const im=new Image(); im.onload=()=>res(im); im.onerror=rej; im.src=URL.createObjectURL(file); }); }
+    const r=Math.min(1,MAX/Math.max(src.width,src.height)); const c=document.createElement("canvas"); c.width=Math.round(src.width*r); c.height=Math.round(src.height*r);
+    c.getContext("2d").drawImage(src,0,0,c.width,c.height); return (await new Promise(res=>c.toBlob(res,"image/jpeg",0.82))) || file;
+  }catch(e){ return file; }
+}
+async function addFiles(files){
+  if(!files||!files.length) return;
+  toast(files.length>1?`Préparation de ${files.length} photos…`:"Préparation de la photo…",1500);
+  for(const f of files){ const blob=await shrink(f); const done=new Set(cur.photos.map(p=>p.legende));
+    cur.photos.push({tmpId:uid(), blob, legende: PHOTO_TODO.find(l=>!done.has(l)) || "Autre"}); }
+  renderPhotos(); touch();
+}
+$("#inCam").addEventListener("change",e=>{ addFiles([...e.target.files]); e.target.value=""; });
+$("#inGal").addEventListener("change",e=>{ addFiles([...e.target.files]); e.target.value=""; });
+
+/* ---------- brouillon ---------- */
+let draftT;
+function touch(){ dirty=true; clearTimeout(draftT); draftT=setTimeout(async()=>{ await sigCommit(); draftPut({cur:{...cur,photos:cur.photos.map(p=>({...p}))}, removedAssets}); },800); }
+
+function show(view){
+  const form=view==="form";
+  for(const [t,sel] of Object.entries(VIEWS)) $(sel).classList.toggle("hidden", form || t!==view);
+  $("#vForm").classList.toggle("hidden",!form);
+  $("#barTabs").classList.toggle("hidden",form); $("#barForm").classList.toggle("hidden",!form);
+  $$("#barTabs [data-tab]").forEach(b=>b.classList.toggle("on", b.dataset.tab===view));
+  if(!form){ $("#hTitle").firstChild.textContent="Mobilier régional du Berry"; renderAll(); }
+  window.scrollTo({top:0});
+}
+function newFiche(base={}){
+  cur=blankFiche(base); cur._orig=null; reseq(); removedAssets=[]; dirty=false; show("form"); fillForm();
+}
+function openFiche(docId){
+  const pend=outbox.find(e=>e.docId===docId); const src=pend?pend.fiche:fiches.get(docId); if(!src) return;
+  const copy=JSON.parse(JSON.stringify({...src,photos:[],signature:null}));
+  cur=blankFiche(copy); cur.docId=docId;
+  if(cur.TYPE_MEUBLE==="Autre (préciser)" && !cur.typeAutre && cur.typeSpec){ cur.typeAutre=cur.typeSpec; cur.typeSpec=""; } cur.photos=(src.photos||[]).map(p=>({...p})); cur.signature=src.signature?{...src.signature}:null;
+  cur._orig={sr:src.SOUS_REGION_CODE, y:yearOf(src), n:src.NUM_SEQ};
+  removedAssets=pend?[...(pend.removedAssets||[])]:[]; dirty=false; show("form"); fillForm();
+}
+function leaveForm(){
+  if(dirty) confirmBox("Quitter sans enregistrer ?","Les modifications de cette fiche seront perdues.","Quitter sans enregistrer",()=>{ dirty=false; draftDel(); show(tab); },true);
+  else { draftDel(); show(tab); }
+}
+$("#cancelBtn").addEventListener("click",leaveForm);
+$("#saveBtn").addEventListener("click",()=>trySave(false));
+$("#saveNextBtn").addEventListener("click",()=>trySave(true));
+$("#vForm").addEventListener("submit",e=>e.preventDefault());
+
+/* ---------- enregistrement ---------- */
+let saving=false;
+function trySave(next){
+  const miss=missingFields(cur);
+  if(!cur.SOUS_REGION_CODE && !cur.TYPE_MEUBLE){ renderMissing(true); toast("Choisissez au moins la sous-région ou le type."); return; }
+  if(miss.length){
+    renderMissing(true);
+    $("#mBody").innerHTML=`<h3>Champs à compléter</h3><p>La fiche peut être enregistrée et complétée plus tard ; elle restera marquée « à compléter ».</p><ul>${miss.map(m=>`<li>${esc(m[1])}</li>`).join("")}</ul>
+      <div class="acts"><button class="btn primary" id="mFix">Compléter maintenant</button><button class="btn" id="mSave">Enregistrer quand même</button></div>`;
+    $("#mDialog").classList.add("open");
+    $("#mFix").onclick=()=>{ closeModal(); const el=$(`[data-req="${miss[0][0]}"]`); if(el) el.scrollIntoView({behavior:"smooth",block:"center"}); };
+    $("#mSave").onclick=()=>{ closeModal(); save(next); };
+  } else save(next);
+}
+async function save(next){
+  if(saving) return; saving=true; $("#saveBtn").disabled=$("#saveNextBtn").disabled=true;
+  await sigCommit();
+  const docId=cur.docId||uid();
+  if(cur.SOUS_REGION_CODE){ // évite un doublon si une autre fiche a pris ce numéro entre-temps
+    const clash=allFiches().some(f=>f.docId!==docId && f.SOUS_REGION_CODE===cur.SOUS_REGION_CODE && yearOf(f)===yearOf(cur) && Number(f.NUM_SEQ)===Number(cur.NUM_SEQ));
+    if(clash || !cur.NUM_SEQ) cur.NUM_SEQ=nextSeq(cur.SOUS_REGION_CODE,yearOf(cur),docId);
+  }
+  const fiche={...cur}; delete fiche.docId; delete fiche._orig; delete fiche._pending;
+  fiche.CODE=codeOf(fiche); fiche.updatedAt=new Date().toISOString(); if(!fiche.createdAt) fiche.createdAt=fiche.updatedAt;
+  const entry={docId, fiche, removedAssets:[...removedAssets]};
+  try{ await outboxPut(entry); }catch(e){}
+  outbox=outbox.filter(e=>e.docId!==docId).concat([entry]);
+  await draftDel(); dirty=false;
+  const base = next ? {DATE_COLLECTE:cur.DATE_COLLECTE, COLLECTEUR:cur.COLLECTEUR, SOUS_REGION_CODE:cur.SOUS_REGION_CODE, PROPRIETAIRE:cur.PROPRIETAIRE,
+    proprioType:cur.proprioType, tel:cur.tel, email:cur.email, commune:cur.commune, insee:cur.insee, cp:cur.cp, lieudit:cur.lieudit, adresse:cur.adresse, gps:cur.gps, auth:{...(cur.auth||{})}} : null;
+  const ok=await pushEntry(entry);
+  toast(ok?`${fiche.CODE||"Fiche"} enregistrée ✓`:`${fiche.CODE||"Fiche"} gardée sur l'appareil — à synchroniser`);
+  renderOutbox(); saving=false; $("#saveBtn").disabled=$("#saveNextBtn").disabled=false;
+  if(next){ newFiche(base); toast("Nouvelle fiche — même propriétaire. Pensez à la signature.",3000); } else show(tab);
+}
+const pushing=new Set();
+async function pushEntry(entry){
+  if(!ghReady() || pushing.has(entry.docId)) return false; pushing.add(entry.docId);
+  try{
+    const f=entry.fiche, id=entry.docId, files=[];
+    for(const p of f.photos){ if(p.blob){ if(!p.path) p.path=`photos/${id}/${p.tmpId||uid()}.jpg`; files.push({path:p.path, blob:p.blob}); } }
+    if(f.signature && f.signature.blob){ if(!f.signature.path) f.signature.path=`signatures/${id}-${uid()}.png`; files.push({path:f.signature.path, blob:f.signature.blob}); }
+    const clean=JSON.parse(JSON.stringify({...f, photos:f.photos.map(p=>({path:p.path, legende:p.legende||""})), signature:f.signature?{path:f.signature.path, date:f.signature.date||""}:null}));
+    files.push({path:`fiches/${id}.json`, text:JSON.stringify(clean,null,1)});
+    await ghCommit(files, entry.removedAssets||[], `${fiches.has(id)?"Mise à jour":"Ajout"} ${clean.CODE||"fiche"} — ${typeLabel(clean)}${clean.COLLECTEUR?" ("+clean.COLLECTEUR+")":""}`);
+    for(const x of files) if(x.blob){ await cachePut("files",x.path,x.blob); fileUrls.set(x.path, URL.createObjectURL(x.blob)); }
+    await outboxDel(id); outbox=outbox.filter(e=>e.docId!==id); fiches.set(id,clean);
+    return true;
+  }catch(e){ console.warn("Envoi impossible",e); try{ await outboxPut(entry); }catch(_){} return false; }
+  finally{ pushing.delete(entry.docId); }
+}
+async function syncAll(silent){
+  if(!outbox.length) return; $("#syncBtn").disabled=true; let ok=0;
+  for(const e of [...outbox]) if(await pushEntry(e)) ok++;
+  $("#syncBtn").disabled=false; renderOutbox(); renderList();
+  if(!silent || ok) toast(ok?`${ok} fiche${ok>1?"s":""} envoyée${ok>1?"s":""} dans GitHub ✓`:"Toujours pas de connexion — réessayez plus tard.");
+}
+$("#syncBtn").addEventListener("click",()=>syncAll());
+window.addEventListener("online",()=>ghLoad());
+
+$("#delBtn").addEventListener("click",()=>{
+  confirmBox(`Supprimer ${codeOf(cur)||"cette fiche"} ?`,"La fiche, ses photos et la signature seront définitivement supprimées.","Supprimer définitivement",async()=>{
+    const id=cur.docId, paths=[`fiches/${id}.json`, ...cur.photos.filter(p=>p.path).map(p=>p.path), ...(cur.signature&&cur.signature.path?[cur.signature.path]:[]), ...removedAssets];
+    try{
+      if(fiches.has(id)){ await ghCommit([], paths, `Suppression ${codeOf(cur)||"fiche"} — ${typeLabel(cur)}`); fiches.delete(id); }
+      await outboxDel(id); outbox=outbox.filter(e=>e.docId!==id);
+      dirty=false; await draftDel(); renderOutbox(); show(tab); toast("Fiche supprimée");
+    }catch(e){ toast("Suppression impossible sans connexion."); }
+  },true);
+});
+
+function closeModal(){ $("#mDialog").classList.remove("open"); }
+$("#mDialog").addEventListener("click",e=>{ if(e.target.id==="mDialog") closeModal(); });
+function confirmBox(title,text,label,onYes,danger){
+  $("#mBody").innerHTML=`<h3>${esc(title)}</h3>${text?`<p>${esc(text)}</p>`:""}<div class="acts"><button class="btn ${danger?"danger":"primary"}" id="mYes">${esc(label)}</button><button class="btn ghost" id="mNo">Annuler</button></div>`;
+  $("#mDialog").classList.add("open"); $("#mYes").onclick=()=>{ closeModal(); onYes(); }; $("#mNo").onclick=closeModal;
+}
+
+/* ---------- dictée ---------- */
+let dictTarget=null, dictBtn=null, dictBase="";
+function setupDictation(){
+  if(!dict) return;
+  $$(".ta textarea").forEach(ta=>{
+    const b=document.createElement("button"); b.type="button"; b.className="mic"; b.title="Dicter"; b.textContent="🎙"; ta.after(b);
+    b.addEventListener("click",()=>{
+      if(dictBtn===b){ dict.stop().catch(()=>{}); return; }
+      if(dictBtn) dict.stop().catch(()=>{});
+      dictTarget=ta; dictBtn=b; dictBase=ta.value;
+      dict.start().catch(err=>{ if(err&&err.code==="not_granted") $$(".mic").forEach(m=>m.remove()); dictBtn=null; b.classList.remove("live"); });
+    });
+  });
+  const put=(txt,final)=>{ if(!dictTarget) return; const sep=dictBase&&!/\s$/.test(dictBase)?" ":""; dictTarget.value=dictBase+sep+txt; if(final) dictBase=dictTarget.value; cur[dictTarget.dataset.k]=dictTarget.value; touch(); };
+  dict.onPartial(({text})=>put(text,false)); dict.onFinal(({text})=>put(text,true));
+  dict.onState(({state})=>{ $$(".mic").forEach(m=>m.classList.toggle("live",m===dictBtn&&state==="listening")); if(state==="idle"){ dictBtn=null; dictTarget=null; } });
+}
+
+/* ======================================================================
+   EXPORT — remplit le fichier Excel d'origine (mise en forme, menus,
+   tableau de bord conservés) en modifiant directement son XML
+   ====================================================================== */
+const NS="http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+const COLS="C D E F G H I J K L M N O P Q R S T U V W X Y Z AA AB AC AD AE AF AG AH AI AJ AK AL AM AN AO AP AQ AR AS".split(" ");
+function photoName(code,i){ return `${code}-P${String(i+1).padStart(2,"0")}.jpg`; }
+function exportRow(f){
+  const code=codeOf(f), a=f.auth||{}, ph=(f.photos||[]).length, es=f.essences||[];
+  const num = v => v===""||v==null||isNaN(Number(v)) ? "" : Math.round(Number(v));
+  return {
+    A:code, C:srDept(f.SOUS_REGION_CODE), D:f.SOUS_REGION_CODE||"", E: yearOf(f)?Number(yearOf(f)):"", F: f.NUM_SEQ?Number(f.NUM_SEQ):"",
+    G:frDate(f.DATE_COLLECTE), H:f.COLLECTEUR||"", I:authLevel(a),
+    J: a.identite ? (f.PROPRIETAIRE||"") : initials(f.PROPRIETAIRE),
+    K: [f.commune, a.adresse ? f.lieudit : "", a.adresse ? f.adresse : ""].filter(Boolean).join(", "),
+    L: !ph ? "" : (code ? `${code}-P01`+(ph>1?` à P${String(ph).padStart(2,"0")}`:"") : `${ph} photo(s)`),
+    M:f.REFS_DOCUMENTAIRES||"", N:f.TYPE_MEUBLE||"", O:num(f.LONGUEUR_CM), P:num(f.LARGEUR_CM), Q:num(f.HAUTEUR_CM),
+    R:es[0]||"", S:es[1]||"", T:f.ORIGINE_BOIS||"", U:f.TECHNIQUE_CONSTRUCTION||"", V:f.ETAT_CONSERVATION||"", W:f.DEGRE_AUTHENTICITE||"",
+    X:f.ELEMENTS_DECORATIFS||"", Y:f.FINITION_SURFACE||"", Z:f.SIGNATURE_ESTAMPILLE||"", AA:f.PERIODE_FABRICATION||"", AB:f.STYLE_REGIONAL||"",
+    AC:f.FILIATION_TYPOLOGIQUE||"", AD:f.PROVENANCE||"", AE:f.FONCTION_ORIGINE||"", AF:f.FONCTION_ACTUELLE||"", AG:f.INDICE_RARETE||"",
+    AH:f.MILIEU_SOCIAL||"", AI:f.EMPLACEMENT_ORIGINE||"", AJ:f.EMPLACEMENT_ACTUEL||"", AK:f.TRANSMISSION_INTERGENE||"", AL:f.VALEUR_SYMBOLIQUE||"",
+    AM:f.RECITS_ORAUX||"", AN:f.RECITS_ORAUX==="Non"?"":(f.RESUME_RECIT_ORAL||""), AO:f.MARQUEUR_REGIONALITE||"", AP:f.INTERET_PATRIMONIAL||"",
+    AQ:f.POTENTIEL_CLASSEMENT||"", AR:f.JUSTIFICATION_NOTE||"", AS:f.AUTRES_REMARQUES||""
+  };
+}
+const COMPL_HEAD=["CODE_AUTO","TYPE_PROPRIETAIRE","CODE_POSTAL","CODE_INSEE","HAMEAU_LIEU_DIT (si adresse autorisée)","GPS (si adresse autorisée)","ADRESSE (si autorisée)","AUTORISATION_DETAIL","SIGNATURE_NUMERIQUE","TYPE_AUTRE","APPELLATION_COMPLEMENTAIRE","ESSENCE_AUTRE","ORIGINE_BOIS_AUTRE","TECHNIQUE_AUTRE",
+  "RESTAURATION_PAR","RESTAURATION_PERIODE","RESTAURATION_PRECISIONS","DECENNIE","STYLE_AUTRE","PROVENANCE_AUTRE","ARGUMENTATION_RARETE","MILIEU_AUTRE",
+  "SOUS_REGION_ORIGINE_INDIQUEE","SOUS_REGION_ORIGINE_ATTESTEE","VALEUR_SYMBOLIQUE_AUTRE","PHOTOS_REALISEES","CHAMPS_A_COMPLETER","DERNIERE_MODIFICATION"];
+function complRow(f){
+  const a=f.auth||{}, code=codeOf(f);
+  return [code||"—", f.proprioType||"", f.cp||(communeOf(f)||{cps:[""]}).cps[0], f.insee||(communeOf(f)||{}).insee||"", a.adresse?(f.lieudit||""):"", a.adresse?(f.gps||""):"", a.adresse?(f.adresse||""):"", AUTH_ITEMS.filter(([k])=>a[k]).map(([,l])=>l).join(" ; ")||"Aucune",
+    f.signature ? `Oui — ${code}-AUTORISATION.png`+(f.signature.date?` (${frDate(f.signature.date)})`:"") : "Non",
+    f.TYPE_MEUBLE==="Autre (préciser)"?(f.typeAutre||""):"", f.typeSpec||"", isAutre(f,"essences")?(f.essenceAutre||""):"", f.ORIGINE_BOIS==="Autre"?(f.origineAutre||""):"", f.TECHNIQUE_CONSTRUCTION==="Autre"?(f.techniqueAutre||""):"", f.restauPar||"", f.restauPeriode||"", f.restauPrecisions||"", f.decennie||"",
+    f.STYLE_REGIONAL==="Autre"?(f.styleAutre||""):"", f.PROVENANCE==="Autre"?(f.provenanceAutre||""):"", f.rareteArg||"", f.MILIEU_SOCIAL==="Autre"?(f.milieuAutre||""):"", f.srOrigineIndiquee||"", f.srOrigineAttestee||"", f.VALEUR_SYMBOLIQUE==="Autre"?(f.valeurAutre||""):"",
+    (f.photos||[]).map((p,i)=>`P${String(i+1).padStart(2,"0")} ${p.legende||""}`).join(" ; "), missingFields(f).map(m=>m[1]).join(" ; "),
+    (f.updatedAt||"").slice(0,16).replace("T"," ")];
+}
+function setCell(c, val){
+  // garde le style (s=) de la cellule du modèle, remplace le contenu
+  while(c.firstChild) c.removeChild(c.firstChild);
+  c.removeAttribute("t");
+  if(val===""||val==null) return;
+  if(typeof val==="number"){ const v=c.ownerDocument.createElementNS(NS,"v"); v.textContent=String(val); c.appendChild(v); return; }
+  c.setAttribute("t","inlineStr");
+  const is=c.ownerDocument.createElementNS(NS,"is"), t=c.ownerDocument.createElementNS(NS,"t");
+  t.setAttribute("xml:space","preserve"); t.textContent=String(val).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,""); is.appendChild(t); c.appendChild(is);
+}
+function fillInventaire(xml, rows){
+  const doc=new DOMParser().parseFromString(xml,"application/xml");
+  const rowEls=new Map(); for(const r of doc.getElementsByTagNameNS(NS,"row")) rowEls.set(r.getAttribute("r"), r);
+  const sheetData=doc.getElementsByTagNameNS(NS,"sheetData")[0];
+  rows.forEach((data,i)=>{
+    const rn=String(4+i); let row=rowEls.get(rn);
+    if(!row){ row=doc.createElementNS(NS,"row"); row.setAttribute("r",rn); sheetData.appendChild(row); }
+    const cells=new Map(); for(const c of row.getElementsByTagNameNS(NS,"c")) cells.set(c.getAttribute("r").replace(/\d+$/,""), c);
+    for(const col of COLS){
+      let c=cells.get(col);
+      if(!c){ c=doc.createElementNS(NS,"c"); c.setAttribute("r",col+rn); row.appendChild(c); }
+      setCell(c, data[col]);
+    }
+    // colonne A : formule conservée, on met juste la valeur affichée en cache
+    const a=cells.get("A"); if(a){ const v=a.getElementsByTagNameNS(NS,"v")[0]; if(v) v.textContent=data.A||"—"; }
+  });
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n'+new XMLSerializer().serializeToString(doc.documentElement);
+}
+function sheetXml(head, rows){
+  const col=i=>{ let s=""; i++; while(i){ const m=(i-1)%26; s=String.fromCharCode(65+m)+s; i=Math.floor((i-1)/26); } return s; };
+  const x=s=>String(s??"").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const line=(vals,r)=>`<row r="${r}">`+vals.map((v,i)=>v===""?"":`<c r="${col(i)}${r}" t="inlineStr"><is><t xml:space="preserve">${x(v)}</t></is></c>`).join("")+`</row>`;
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<worksheet xmlns="${NS}"><sheetViews><sheetView workbookViewId="0"><pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews><cols>`+
+    head.map((h,i)=>`<col min="${i+1}" max="${i+1}" width="${Math.max(14,Math.min(40,h.length+4))}" customWidth="1"/>`).join("")+
+    `</cols><sheetData>`+line(head,1)+rows.map((r,i)=>line(r,i+2)).join("")+`</sheetData><autoFilter ref="A1:${col(head.length-1)}${rows.length+1}"/></worksheet>`;
+}
+async function tplBytes(){ return new Uint8Array(await (await ghFile("modeles/modele_inventaire.xlsx")).arrayBuffer()); }
+function sortedFiches(){ return allFiches().sort((a,b)=>{ const ca=codeOf(a), cb=codeOf(b); if(!ca!==!cb) return ca?-1:1; return (ca||a.createdAt||"").localeCompare(cb||b.createdAt||""); }); }
+async function buildXlsx(list){
+  const z=await JSZip.loadAsync(await tplBytes());
+  const s1=await z.file("xl/worksheets/sheet1.xml").async("string");
+  z.file("xl/worksheets/sheet1.xml", fillInventaire(s1, list.map(exportRow)));
+  // nouvel onglet « Compléments terrain »
+  z.file("xl/worksheets/sheet5.xml", sheetXml(COMPL_HEAD, list.map(complRow)));
+  let wb=await z.file("xl/workbook.xml").async("string");
+  wb=wb.replace("</sheets>",'<sheet name="Compléments terrain" sheetId="5" r:id="rId99"/></sheets>');
+  wb=wb.replace(/<calcPr([^>]*?)\/>/, (m,a)=>`<calcPr${a.replace(/\sfullCalcOnLoad="[^"]*"/,"")} fullCalcOnLoad="1"/>`);
+  z.file("xl/workbook.xml", wb);
+  let rels=await z.file("xl/_rels/workbook.xml.rels").async("string");
+  rels=rels.replace("</Relationships>",'<Relationship Id="rId99" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet5.xml"/></Relationships>');
+  z.file("xl/_rels/workbook.xml.rels", rels);
+  let ct=await z.file("[Content_Types].xml").async("string");
+  ct=ct.replace("</Types>",'<Override PartName="/xl/worksheets/sheet5.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>');
+  z.file("[Content_Types].xml", ct);
+  return z.generateAsync({type:"uint8array", compression:"DEFLATE"});
+}
+function openExport(){
+  const n=allFiches().length; if(!n){ toast("Aucune fiche à exporter."); return; }
+  const pend=outbox.length;
+  $("#mBody").innerHTML=`<h3>Exporter ${n} fiche${n>1?"s":""}</h3>
+    <p>Le fichier Excel est <b>votre modèle d'origine</b> rempli (onglet Inventaire, tableau de bord recalculé), plus un onglet « Compléments terrain » pour les champs de la fiche papier absents du tableau. Les noms sont anonymisés selon les autorisations.</p>
+    ${pend?`<p class="pill warn" style="display:inline-block">${pend} fiche(s) pas encore synchronisée(s) — incluses quand même</p>`:""}
+    <div class="acts"><button class="btn primary" id="xZ">Excel + photos + signatures (.zip)</button><button class="btn" id="xX">Excel seul (.xlsx)</button>
+    <div class="progress hidden" id="xP"><i></i></div><button class="btn ghost" id="xC">Fermer</button></div>`;
+  $("#mDialog").classList.add("open"); $("#xC").onclick=closeModal; $("#xX").onclick=()=>doExport(false); $("#xZ").onclick=()=>doExport(true);
+}
+async function doExport(zip){
+  if(!window.JSZip){ toast("Chargement de l'outil d'export… réessayez dans un instant."); return; }
+  const btns=[$("#xX"),$("#xZ")]; btns.forEach(b=>b.disabled=true);
+  try{
+    const list=sortedFiches(); const xlsx=await buildXlsx(list);
+    const base=`inventaire_berry_${today()}`;
+    if(!zip) saveFile(base+".xlsx", new Blob([xlsx]));
+    else{
+      const z=new JSZip(); z.file(base+".xlsx",xlsx); const dp=z.folder("photos"), ds=z.folder("autorisations");
+      const jobs=[]; for(const f of list){ const code=codeOf(f)||("SANS-CODE-"+(f.docId||"").slice(-5));
+        (f.photos||[]).forEach((p,i)=>jobs.push([dp,photoName(code,i),p])); if(f.signature) jobs.push([ds,`${code}-AUTORISATION.png`,f.signature]); }
+      const bar=$("#xP"); bar.classList.remove("hidden"); let done=0, fail=0;
+      for(const [dir,name,p] of jobs){ try{ dir.file(name, await fileBlob(p)); }catch(e){ fail++; }
+        done++; bar.firstElementChild.style.width=(100*done/Math.max(jobs.length,1))+"%"; }
+      const out=await z.generateAsync({type:"blob"});
+      saveFile(base+".zip", out);
+      if(fail) toast(`${fail} image(s) n'ont pas pu être ajoutées.`,4000);
+    }
+    closeModal(); toast("Export prêt ✓");
+  }catch(e){
+    console.warn(e); toast(ghReady()?"L'export a échoué (connexion ?). Réessayez.":"Connectez d'abord le dépôt GitHub.");
+  }finally{ btns.forEach(b=>b&&(b.disabled=false)); }
+}
+
+/* ======================================================================
+   STOCKAGE GITHUB — les fiches, photos et signatures sont des fichiers
+   d'un dépôt PRIVÉ ; chaque enregistrement = un commit (historique complet)
+   ====================================================================== */
+const GH_DEFAULT={owner:"mfggwwggff-debug", repo:"inventaire-mobilier-berry-donnees", branch:"main", token:""};
+let ghCfg=(()=>{ try{ return {...GH_DEFAULT, ...JSON.parse(localStorage.getItem("ghCfg")||"{}")}; }catch(e){ return {...GH_DEFAULT}; } })();
+let ghPaths=new Set(), ghOnline=false, ghLoading=null;
+const ghReady=()=>!!(ghCfg.token && ghCfg.owner && ghCfg.repo);
+const repoPath=p=>`/repos/${encodeURIComponent(ghCfg.owner)}/${encodeURIComponent(ghCfg.repo)}${p}`;
+async function gh(path, opts={}){
+  const r=await fetch("https://api.github.com"+path,{...opts, cache:"no-store", headers:{Authorization:"Bearer "+ghCfg.token, Accept:"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28", ...(opts.body?{"Content-Type":"application/json"}:{}), ...(opts.headers||{})}});
+  if(!r.ok){ const e=new Error("GitHub "+r.status); e.status=r.status; try{ e.body=await r.json(); }catch(_){} throw e; }
+  return r;
+}
+const ghJson=async(p,o)=>(await gh(p,o)).json();
+const b64ToText=b=>new TextDecoder().decode(Uint8Array.from(atob(b.replace(/\n/g,"")),c=>c.charCodeAt(0)));
+const textToB64=t=>{ const u=new TextEncoder().encode(t); let s=""; for(let i=0;i<u.length;i+=8192) s+=String.fromCharCode.apply(null,u.subarray(i,i+8192)); return btoa(s); };
+async function blobToB64(b){ const u=new Uint8Array(await b.arrayBuffer()); let s=""; for(let i=0;i<u.length;i+=8192) s+=String.fromCharCode.apply(null,u.subarray(i,i+8192)); return btoa(s); }
+
+// cache local (IndexedDB) : JSON des fiches par sha, et fichiers binaires par chemin
+const cacheGet=(st,k)=>idbOp(st,"readonly",s=>s.get(k)).catch(()=>undefined);
+const cachePut=(st,k,v)=>idbOp(st,"readwrite",s=>s.put(v,k)).catch(()=>{});
+
+async function ghHead(){
+  try{ const ref=await ghJson(repoPath(`/git/ref/heads/${encodeURIComponent(ghCfg.branch)}`)); return ref.object.sha; }
+  catch(e){
+    if(e.status===409 || e.status===404){ // dépôt vide : on crée un premier commit
+      await gh(repoPath(`/contents/LISEZMOI.md`),{method:"PUT",body:JSON.stringify({message:"Initialisation du dépôt de données",branch:ghCfg.branch,
+        content:textToB64("# Données de l'inventaire du mobilier du Berry\n\nDépôt privé : fiches (fiches/), photos (photos/), autorisations signées (signatures/).\nNe pas rendre public : contient des données personnelles.\n")})});
+      const ref=await ghJson(repoPath(`/git/ref/heads/${encodeURIComponent(ghCfg.branch)}`)); return ref.object.sha;
+    }
+    throw e;
+  }
+}
+async function ghLoad(){
+  if(!ghReady()) { setStatus("Non connecté","warn"); return; }
+  if(ghLoading) return ghLoading;
+  ghLoading=(async()=>{
+    setStatus("Synchronisation…");
+    try{
+      const head=await ghHead();
+      const tree=await ghJson(repoPath(`/git/trees/${head}?recursive=1`));
+      ghPaths=new Set(tree.tree.filter(t=>t.type==="blob").map(t=>t.path));
+      const items=tree.tree.filter(t=>t.type==="blob" && /^fiches\/[^/]+\.json$/.test(t.path));
+      const next=new Map(); let i=0;
+      const worker=async()=>{ while(i<items.length){ const it=items[i++]; let data=await cacheGet("ghjson",it.sha);
+        if(!data){ const b=await ghJson(repoPath(`/git/blobs/${it.sha}`)); data=JSON.parse(b64ToText(b.content)); await cachePut("ghjson",it.sha,data); }
+        next.set(it.path.slice(7,-5), data); } };
+      await Promise.all(Array.from({length:6},worker));
+      fiches=next; ghOnline=true; setStatus("GitHub ✓","ok");
+      if(outbox.length) await syncAll(true);
+    }catch(e){
+      ghOnline=false; console.warn(e);
+      if(e.status===401) setStatus("Clé refusée","bad"); else if(e.status===404) setStatus("Dépôt introuvable","bad");
+      else setStatus(navigator.onLine?"GitHub injoignable":"Hors ligne","warn");
+    }finally{ ghLoading=null; if($("#vForm").classList.contains("hidden")) renderAll(); }
+  })();
+  return ghLoading;
+}
+// un commit atomique : fichiers ajoutés/modifiés + fichiers supprimés
+async function ghCommit(files, deletes, message){
+  const entries=[];
+  for(const f of files){
+    const body = f.blob ? {content:await blobToB64(f.blob), encoding:"base64"} : {content:textToB64(f.text), encoding:"base64"};
+    const b=await ghJson(repoPath(`/git/blobs`),{method:"POST",body:JSON.stringify(body)});
+    entries.push({path:f.path, mode:"100644", type:"blob", sha:b.sha});
+  }
+  for(let attempt=0; attempt<4; attempt++){
+    const head=await ghHead();
+    const hc=await ghJson(repoPath(`/git/commits/${head}`));
+    if(attempt>0){ const t=await ghJson(repoPath(`/git/trees/${head}?recursive=1`)); ghPaths=new Set(t.tree.filter(x=>x.type==="blob").map(x=>x.path)); }
+    const dels=deletes.filter(p=>ghPaths.has(p)).map(p=>({path:p, mode:"100644", type:"blob", sha:null}));
+    const tree=await ghJson(repoPath(`/git/trees`),{method:"POST",body:JSON.stringify({base_tree:hc.tree.sha, tree:[...entries,...dels]})});
+    const c=await ghJson(repoPath(`/git/commits`),{method:"POST",body:JSON.stringify({message, tree:tree.sha, parents:[head]})});
+    try{ await gh(repoPath(`/git/refs/heads/${encodeURIComponent(ghCfg.branch)}`),{method:"PATCH",body:JSON.stringify({sha:c.sha, force:false})});
+      files.forEach(f=>ghPaths.add(f.path)); deletes.forEach(p=>ghPaths.delete(p)); return c.sha; }
+    catch(e){ if(e.status!==422 || attempt===3) throw e; await new Promise(r=>setTimeout(r,400+Math.random()*600)); } // quelqu'un a enregistré entre-temps : on recommence
+  }
+}
+// fichiers binaires (photos, signatures, modèles) : cache local d'abord
+async function ghFile(path){
+  let b=await cacheGet("files",path); if(b) return b;
+  if(!ghReady()) throw new Error("non connecté");
+  const r=await gh(repoPath(`/contents/${path.split("/").map(encodeURIComponent).join("/")}?ref=${encodeURIComponent(ghCfg.branch)}`),{headers:{Accept:"application/vnd.github.raw"}});
+  b=await r.blob(); await cachePut("files",path,b); return b;
+}
+
+/* ---------- images : chargées à la demande depuis le dépôt privé ---------- */
+const fileUrls=new Map(); const BLANK="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+function imgSrc(p){ if(!p) return ""; if(p.blob) return blobUrl(p.blob); if(p.path && fileUrls.has(p.path)) return fileUrls.get(p.path); return BLANK; }
+function imgAttr(p){ return `src="${esc(imgSrc(p))}"${p && !p.blob && p.path && !fileUrls.has(p.path) ? ` data-gh="${esc(p.path)}"` : ""}`; }
+const hydrateQ=[]; let hydrating=0;
+function hydrate(){
+  $$("img[data-gh]").forEach(img=>{ const p=img.dataset.gh; img.removeAttribute("data-gh");
+    if(fileUrls.has(p)){ img.src=fileUrls.get(p); return; } hydrateQ.push([img,p]); });
+  const run=async()=>{ while(hydrateQ.length && hydrating<4){ const [img,p]=hydrateQ.shift(); hydrating++;
+    try{ if(!fileUrls.has(p)) fileUrls.set(p, URL.createObjectURL(await ghFile(p))); img.src=fileUrls.get(p); }catch(e){ img.alt="photo indisponible hors ligne"; }
+    finally{ hydrating--; run(); } } };
+  run();
+}
+new MutationObserver(()=>{ if(document.querySelector("img[data-gh]")) hydrate(); }).observe(document.body,{childList:true,subtree:true});
+function setImg(el,p){ el.removeAttribute("data-gh"); el.src=imgSrc(p); if(p && p.path && !p.blob && !fileUrls.has(p.path)) el.dataset.gh=p.path; hydrate(); }
+async function fileBlob(p){ return p.blob || ghFile(p.path); }
+
+/* ---------- téléchargements (fichiers générés) ---------- */
+function saveFile(name, data){
+  const blob = data instanceof Blob ? data : new Blob([data]);
+  const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },4000);
+}
+
+/* ---------- réglages de connexion ---------- */
+function openSettings(){
+  $("#mBody").innerHTML=`<h3>Connexion au dépôt de données</h3>
+    <p>Les fiches sont enregistrées dans un dépôt GitHub <b>privé</b>. La clé d'accès reste sur cet appareil uniquement.</p>
+    <div class="f"><label>Propriétaire du dépôt</label><input type="text" id="sOwner" value="${esc(ghCfg.owner)}" autocapitalize="off"></div>
+    <div class="f"><label>Nom du dépôt</label><input type="text" id="sRepo" value="${esc(ghCfg.repo)}" autocapitalize="off"></div>
+    <div class="f"><label>Branche</label><input type="text" id="sBranch" value="${esc(ghCfg.branch)}" autocapitalize="off"></div>
+    <div class="f"><label>Clé d'accès (token)</label><input type="password" id="sToken" value="${esc(ghCfg.token)}" placeholder="github_pat_…" autocapitalize="off" autocomplete="off"></div>
+    <p class="hint" id="sMsg"></p>
+    <div class="acts"><button class="btn primary" id="sSave">Tester et enregistrer</button>
+    ${ghCfg.token?`<button class="btn danger" id="sOut">Déconnecter cet appareil</button>`:""}<button class="btn ghost" id="sClose">Fermer</button></div>`;
+  $("#mDialog").classList.add("open"); $("#sClose").onclick=closeModal;
+  $("#sSave").onclick=async()=>{
+    const c={owner:$("#sOwner").value.trim(), repo:$("#sRepo").value.trim(), branch:$("#sBranch").value.trim()||"main", token:$("#sToken").value.trim()};
+    const msg=$("#sMsg"); msg.textContent="Vérification…";
+    const old=ghCfg; ghCfg=c;
+    try{ const r=await ghJson(repoPath(""));
+      if(!r.private){ msg.innerHTML=`<span class="warn-txt">⚠ Ce dépôt est PUBLIC : tout le monde verrait les données personnelles. Rendez-le privé dans GitHub (Settings → Danger Zone → Change visibility), puis réessayez.</span>`; ghCfg=old; return; }
+      if(r.permissions && !r.permissions.push){ msg.innerHTML=`<span class="warn-txt">Cette clé peut lire mais pas écrire. Donnez-lui l'autorisation « Contents : Read and write ».</span>`; ghCfg=old; return; }
+      try{ localStorage.setItem("ghCfg",JSON.stringify(c)); }catch(e){}
+      closeModal(); toast("Connecté au dépôt ✓"); fiches=new Map(); ghLoad();
+    }catch(e){ ghCfg=old; msg.innerHTML=`<span class="warn-txt">${e.status===401?"Clé refusée (expirée ou mal copiée).":e.status===404?"Dépôt introuvable, ou la clé n'a pas accès à ce dépôt.":"Connexion impossible : vérifiez le réseau."}</span>`; }
+  };
+  const out=$("#sOut"); if(out) out.onclick=()=>confirmBox("Déconnecter cet appareil ?", outbox.length?`Attention : ${outbox.length} fiche(s) pas encore envoyée(s) resteront bloquées sur cet appareil.`:"La clé sera effacée de cet appareil. Les données restent dans GitHub.","Déconnecter",()=>{
+    ghCfg={...ghCfg, token:""}; try{ localStorage.setItem("ghCfg",JSON.stringify(ghCfg)); }catch(e){} fiches=new Map(); setStatus("Non connecté","warn"); renderAll(); },true);
+}
+$("#status").addEventListener("click",()=>{ if(!ghReady()) openSettings(); else ghLoad(); });
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible" && ghReady() && Date.now()-(window._lastLoad||0)>60000){ window._lastLoad=Date.now(); ghLoad(); } });
+
+/* ======================================================================
+   PICTOGRAMMES DES TYPES DE MEUBLES
+   ====================================================================== */
+const ICON_PATHS = {
+  "Armoire":"M5 2h14v19H5z M12 2v19 M10 10.5v2.5 M14 10.5v2.5 M6 21v1.5 M18 21v1.5 M4 2h16",
+  "Bahut":"M4 4h16v15H4z M4 8h16 M12 8v11 M10 12.5v2 M14 12.5v2 M5 19v2 M19 19v2",
+  "Banc":"M2 10.5h20v2.5H2z M4 13v7 M20 13v7 M4 17h16",
+  "Blutoir":"M4 3h16v18H4z M4 7h16 M12 14m-3 0a3 3 0 1 0 6 0a3 3 0 1 0-6 0 M12 14l2.2-2 M20 13h2.5",
+  "Bonnetière":"M7 2h10v19H7z M9 4.5h6v13H9z M15.8 10.5v2.5 M8 21v1.5 M16 21v1.5 M6 2h12",
+  "Buffet":"M2 9h20 M3 9h18v10H3z M3 12h18 M12 12v7 M10 14.5v2 M14 14.5v2 M4 19v2 M20 19v2",
+  "Buffet à 2 corps":"M3 13h18v8H3z M12 13v8 M10.5 16v2 M13.5 16v2 M5 3h14v10H5z M12 3v10 M10.5 7v2 M13.5 7v2 M4 3h16",
+  "Coffre":"M3 10h18v10H3z M3 10c0-4.5 18-4.5 18 0 M3 13h18 M11 13v3h2v-3 M4 20v1.5 M20 20v1.5",
+  "Commode":"M2 6h20 M3 6h18v13H3z M3 10.3h18 M3 14.6h18 M10.5 8.2h3 M10.5 12.5h3 M10.5 16.8h3 M4 19v2 M20 19v2",
+  "Horloge":"M8 2h8v20H8z M12 7.5m-2.6 0a2.6 2.6 0 1 0 5.2 0a2.6 2.6 0 1 0-5.2 0 M12 7.5V6 M12 7.5l1.3.9 M10 13h4v6h-4z",
+  "Lit":"M3 5v15 M21 10v10 M3 16h18 M3 12.5h18V16 M5 12.5V9.5h5.5v3",
+  "Pétrin":"M2.5 7h19l-2.2 7H4.7z M2.5 7l1.2-2h16.6l1.2 2 M6 14l-1.2 7 M18 14l1.2 7 M5.5 18h13",
+  "Siège":"M8 2v20 M8 12.5h10v9.5 M8 12.5h10 M8 5h3.5 M8 8.5h3.5 M11.5 2v10.5",
+  "Table":"M2 8h20v2.5H2z M4 10.5v10.5 M20 10.5v10.5 M4 14.5h16",
+  "Vaisselier":"M3 13h18v8H3z M12 13v8 M5 2h14v11H5z M5 6.5h14 M5 10h14 M7.5 5h2 M11 5h2 M14.5 5h2 M7.5 8.5h2 M11 8.5h2 M14.5 8.5h2 M4 2h16",
+  "Autre (préciser)":"M12 3l2.6 5.6 6.1.7-4.5 4.1 1.2 6.1L12 16.5l-5.4 3 1.2-6.1-4.5-4.1 6.1-.7z"
+};
+function iconPath(t){ return ICON_PATHS[t] || ICON_PATHS["Autre (préciser)"]; }
+function icon(t, cls=""){ return `<svg class="${cls}" viewBox="0 0 24 24"><path class="ico" d="${iconPath(t)}"/></svg>`; }
+
+/* ======================================================================
+   COMMUNES DU CHER (18) ET DE L'INDRE (36) — source : geo.api.gouv.fr
+   ====================================================================== */
+const COMMUNES = $("#communesData").textContent.trim().split("\n").map(l=>{
+  const [insee,nom,cps,lon,lat]=l.trim().split(";"); return {insee,nom,cps:cps.split("|"),lon:+lon,lat:+lat,dep:insee.slice(0,2)}; });
+const fold = s => (s||"").replace(/œ/gi,"oe").replace(/æ/gi,"ae").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase()
+  .replace(/['’\-]/g," ").replace(/\bste\b/g,"sainte").replace(/\bst\b/g,"saint").replace(/\s+/g," ").trim();
+COMMUNES.forEach(c=>c.k=fold(c.nom));
+const COMMUNE_BY_INSEE = new Map(COMMUNES.map(c=>[c.insee,c]));
+function communeOf(f){
+  if(f.insee && COMMUNE_BY_INSEE.has(f.insee)) return COMMUNE_BY_INSEE.get(f.insee);
+  const k=fold(f.commune); if(!k) return null; const m=COMMUNES.filter(c=>c.k===k); return m.length===1?m[0]:null;
+}
+function searchCommunes(q){
+  const t=(q||"").trim(); if(!t) return [];
+  if(/^\d{2,5}$/.test(t)) return COMMUNES.filter(c=>c.cps.some(cp=>cp.startsWith(t))).sort((a,b)=>a.cps[0].localeCompare(b.cps[0])||a.k.localeCompare(b.k)).slice(0,30);
+  const k=fold(t);
+  return COMMUNES.filter(c=>c.k.includes(k)).sort((a,b)=>(b.k.startsWith(k)-a.k.startsWith(k))||a.k.localeCompare(b.k)).slice(0,15);
+}
+function parseGps(s){
+  const m=(s||"").match(/(-?\d{1,2}[.,]\d+)\s*[,; ]\s*(-?\d{1,3}[.,]\d+)/); if(!m) return null;
+  let a=parseFloat(m[1].replace(",",".")), b=parseFloat(m[2].replace(",","."));
+  if(a<10 && b>40){ const t=a; a=b; b=t; } // inversé (lon, lat)
+  if(a<44 || a>49 || b<-1 || b>5) return null;
+  return {lat:a, lon:b};
+}
+
+/* ---------- sélecteur de commune ---------- */
+const cIn=$("#communeIn"), cSug=$("#communeSugg");
+let sugItems=[];
+function renderCommuneInfo(){
+  const c = cur.insee ? COMMUNE_BY_INSEE.get(cur.insee) : null;
+  const info=$("#communeInfo");
+  if(c) info.innerHTML=`<span class="ok-txt">✓ ${esc(cur.cp||c.cps[0])} · ${c.dep==="18"?"Cher":"Indre"} — placée sur la carte</span>`;
+  else if(norm(cur.commune)){
+    const guess=communeOf(cur);
+    info.innerHTML = guess ? `<span class="ok-txt">✓ reconnue : ${esc(guess.nom)} (${esc(guess.cps[0])})</span>` : `<span class="warn-txt">Saisie manuelle, hors liste du Cher et de l'Indre : pas de point sur la carte, sauf si vous ajoutez des coordonnées GPS.</span>`;
+  } else info.textContent="";
+  const g=parseGps(cur.gps), gi=$("#gpsInfo");
+  if(norm(cur.gps)) gi.innerHTML = g ? `<span class="ok-txt">✓ ${g.lat.toFixed(5)}, ${g.lon.toFixed(5)} — le hameau sera placé à cet endroit</span>` : `<span class="warn-txt">Coordonnées non reconnues (format attendu : 47.3248, 2.8220)</span>`;
+  else gi.textContent="Dans Google Maps ou Plans : appui long sur le lieu → copier les coordonnées → coller ici.";
+  // lieux-dits déjà saisis dans cette commune
+  const k=fold(cur.commune); const lds=[...new Set(allFiches().filter(f=>fold(f.commune)===k && norm(f.lieudit)).map(f=>norm(f.lieudit)))].sort();
+  $("#dlLieudits").innerHTML=lds.map(v=>`<option value="${esc(v)}">`).join("");
+}
+function showSugg(){
+  const q=cIn.value; sugItems=[];
+  searchCommunes(q).forEach(c=>{ const cps = /^\d/.test(q.trim()) ? c.cps.filter(cp=>cp.startsWith(q.trim())) : c.cps; (cps.length?cps:c.cps).forEach(cp=>sugItems.push({c,cp})); });
+  if(!q.trim()){ cSug.classList.add("hidden"); return; }
+  const exact = sugItems.some(s=>s.c.k===fold(q));
+  cSug.innerHTML = sugItems.map((s,i)=>`<button type="button" data-i="${i}"><span>${esc(s.c.nom)}</span><small>${esc(s.cp)} · ${s.c.dep==="18"?"Cher":"Indre"}</small></button>`).join("")
+    + (exact||/^\d+$/.test(q.trim()) ? "" : `<button type="button" data-manual="1" class="manual"><span>Garder « ${esc(q.trim())} » (saisie manuelle)</span></button>`);
+  cSug.classList.toggle("hidden", !cSug.innerHTML);
+}
+cIn.addEventListener("input",()=>{ cur.insee=""; cur.cp=""; showSugg(); renderCommuneInfo(); });
+cIn.addEventListener("focus",()=>{ if(cIn.value && !cur.insee) showSugg(); });
+cIn.addEventListener("blur",()=>setTimeout(()=>cSug.classList.add("hidden"),180));
+cSug.addEventListener("pointerdown",e=>{
+  const b=e.target.closest("button"); if(!b) return; e.preventDefault();
+  if(b.dataset.manual){ cur.commune=norm(cIn.value); cur.insee=""; cur.cp=""; }
+  else { const s=sugItems[+b.dataset.i]; cur.commune=s.c.nom; cur.insee=s.c.insee; cur.cp=s.cp; }
+  cIn.value=cur.commune; cSug.classList.add("hidden"); renderCommuneInfo(); touch(); cIn.blur();
+});
+$("#gpsIn").addEventListener("input",renderCommuneInfo);
+// propriétaire déjà connu → reprend ses coordonnées
+$("#ownerIn").addEventListener("change",()=>{
+  const p=peopleIndex().get(fold(cur.PROPRIETAIRE)); if(!p || cur.docId) return;
+  let n=0; for(const k of ["proprioType","tel","email","commune","insee","cp","lieudit","adresse","gps"]) if(!norm(cur[k]) && norm(p[k])){ cur[k]=p[k]; n++; }
+  if(n){ fillForm(); toast(`Coordonnées de ${p.PROPRIETAIRE} reprises de l'annuaire`); touch(); }
+});
+
+/* ======================================================================
+   NAVIGATION PAR ONGLETS
+   ====================================================================== */
+let tab="home";
+const VIEWS={home:"#vHome",list:"#vList",gallery:"#vGallery",people:"#vPeople"};
+function setTab(t){ tab=t; show(t); }
+$$("#barTabs [data-tab]").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
+$$(".act-new").forEach(b=>b.addEventListener("click",()=>newFiche()));
+$$(".act-export").forEach(b=>b.addEventListener("click",()=>openExport()));
+$$(".act-pdf").forEach(b=>b.addEventListener("click",downloadPdf));
+function renderAll(){
+  renderExportBanner();
+  if(tab==="home") renderHome(); else if(tab==="list") renderListView(); else if(tab==="gallery") renderGallery(); else if(tab==="people") renderPeople();
+  const uniq=k=>[...new Set(allFiches().map(f=>(f[k]||"").trim()).filter(Boolean))].sort();
+  $("#dlOwners").innerHTML=uniq("PROPRIETAIRE").map(v=>`<option value="${esc(v)}">`).join("");
+}
+
+/* ---------- PDF de la fiche papier ---------- */
+async function downloadPdf(){
+  try{ saveFile("fiche_terrain_berry.pdf", await ghFile("modeles/fiche_terrain_berry.pdf")); toast("Fiche papier téléchargée — prête à imprimer"); }
+  catch(e){ toast(ghReady()?"Fiche indisponible hors ligne (ouvrez-la une première fois avec du réseau).":"Connectez d'abord le dépôt GitHub."); }
+}
+
+/* ======================================================================
+   ACCUEIL
+   ====================================================================== */
+function miniCard(f){
+  return `<button class="mini" data-id="${esc(f.docId)}">${icon(f.TYPE_MEUBLE)}<span class="m"><span class="c">${esc(codeOf(f)||"Code incomplet")}</span><div><b>${esc(typeLabel(f))}</b>${f.STYLE_REGIONAL?" · "+esc(f.STYLE_REGIONAL):""}</div><div class="meta" style="color:var(--muted);font-size:.85rem">${esc([f.PROPRIETAIRE,f.lieudit,f.commune].filter(Boolean).join(" — "))}</div></span></button>`;
+}
+function renderHome(){
+  const items=allFiches(); const n=items.length;
+  $("#hN").textContent=n; $("#hN").nextElementSibling.textContent = n>1?"meubles recensés":"meuble recensé";
+  const owners=new Set(items.map(f=>fold(f.PROPRIETAIRE)).filter(Boolean)).size;
+  const communes=new Set(items.map(f=>fold(f.commune)).filter(Boolean)).size;
+  const hamlets=new Set(items.filter(f=>norm(f.lieudit)).map(f=>fold(f.commune)+"|"+fold(f.lieudit))).size;
+  const photos=items.reduce((s,f)=>s+(f.photos||[]).length,0);
+  const todo=items.filter(f=>missingFields(f).length).length;
+  const signed=items.filter(f=>f.signature).length;
+  const k=(v,l,cls="",act="")=>`<button class="kpi ${cls}" ${act?`data-act="${act}"`:""}><b>${v}</b><span>${l}</span></button>`;
+  $("#hKpis").innerHTML = k(owners,"propriétaires","","people")+k(communes,"communes")+k(hamlets,"hameaux")+k(photos,"photos","","gallery")+k(signed,"autorisations signées")+k(todo,"à compléter",todo?"warn":"","todo");
+  const cnt={}; items.forEach(f=>{ const t=f.TYPE_MEUBLE||""; cnt[t]=(cnt[t]||0)+1; });
+  $("#tiles").innerHTML = OPTS.TYPE_MEUBLE.map(t=>`<button class="tile${cnt[t]?"":" zero"}" data-type="${esc(t)}">${icon(t)}<b>${cnt[t]||0}</b><span>${esc(t==="Autre (préciser)"?"Autres":t)}</span></button>`).join("");
+  const src={}; items.forEach(f=>{ const c=srCode(f.SOUS_REGION_CODE); if(c) src[c]=(src[c]||0)+1; });
+  const mx=Math.max(1,...Object.values(src));
+  $("#srBars").innerHTML = [...SR.CHR,...SR.IND].map(v=>{ const c=srCode(v), nm=v.split(" – ")[1].replace(/ \((Cher|Indre)\)/,""), x=src[c]||0;
+    return `<div class="barrow"><span class="lab" title="${esc(v)}">${esc(c)} · ${esc(nm)}</span><span class="track"><i style="width:${100*x/mx}%"></i></span><b>${x}</b></div>`; }).join("");
+  const recent=[...items].sort((a,b)=>(b.updatedAt||"").localeCompare(a.updatedAt||"")).slice(0,5);
+  $("#recent").innerHTML=recent.map(miniCard).join("");
+  $("#homeEmpty").classList.toggle("hidden", n>0);
+  renderMap();
+}
+$("#hKpis").addEventListener("click",e=>{ const b=e.target.closest("[data-act]"); if(!b) return; const a=b.dataset.act;
+  if(a==="todo"){ $("#fTodo").checked=true; $("#fType").value=""; setTab("list"); } else setTab(a); });
+$("#tiles").addEventListener("click",e=>{ const b=e.target.closest(".tile"); if(!b) return; $("#fType").value=b.dataset.type; $("#fTodo").checked=false; $("#q").value=""; setTab("list"); });
+document.addEventListener("click",e=>{ const b=e.target.closest(".mini"); if(b && b.dataset.id) openFiche(b.dataset.id); });
+
+/* ======================================================================
+   CARTE (SVG, sans fond de carte externe)
+   ====================================================================== */
+const LAT0=46.95, KX=Math.cos(LAT0*Math.PI/180);
+const LON_MIN=0.84, LAT_MAX=47.64;
+const px = (lon,lat) => [ (lon-LON_MIN)*KX*100, (LAT_MAX-lat)*100 ];
+const FULL={x:0,y:0,w:(3.11-LON_MIN)*KX*100, h:(LAT_MAX-46.32)*100};
+let vb={...FULL}, mapSel=null, mapBuilt=false;
+const BIG=[["Bourges","18033"],["Châteauroux","36044"],["Vierzon","18279"],["Issoudun","36088"],["Saint-Amand-Montrond","18197"],["La Châtre","36046"],["Le Blanc","36018"],["Sancerre","18241"],["Aubigny-sur-Nère","18015"],["Argenton-sur-Creuse","36006"],["Valençay","36228"],["Sancoins","18242"]];
+function buildMapBase(){
+  const svg=$("#map");
+  const dots=COMMUNES.map(c=>{ const [x,y]=px(c.lon,c.lat); return `<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="1.15" fill="${c.dep==="18"?"#d9c3a5":"#bfcbb0"}"/>`; }).join("");
+  const labs=BIG.map(([n,i])=>{ const c=COMMUNE_BY_INSEE.get(i); const [x,y]=px(c.lon,c.lat); return `<g class="lab"><circle cx="${x}" cy="${y}" r=".9" fill="#7b6a5a"/><text x="${x+1.6}" y="${y+1.1}">${esc(n)}</text></g>`; }).join("");
+  const [cx,cy]=px(2.28,47.47), [ix,iy]=px(1.18,46.98);
+  svg.innerHTML=`<style>text{font-family:"Source Sans 3",sans-serif;fill:#6d5c4c}.lab text{font-size:3.2px}.dep{font-size:6px;font-weight:700;letter-spacing:.6px;fill:#b29c80;font-family:Fraunces,serif}</style>
+    <g id="mBase">${dots}<text class="dep" x="${cx}" y="${cy}">CHER</text><text class="dep" x="${ix}" y="${iy}">INDRE</text>${labs}</g><g id="mMarks"></g>`;
+  mapBuilt=true;
+}
+function applyVb(){ $("#map").setAttribute("viewBox",`${vb.x} ${vb.y} ${vb.w} ${vb.h}`); renderMarks(); }
+function mapGroups(){
+  const g=new Map(); let unplaced=0;
+  for(const f of allFiches()){
+    const gps=parseGps(f.gps), c=communeOf(f); let key, x, y, hamlet=false, title;
+    if(gps){ [x,y]=px(gps.lon,gps.lat); key="g:"+gps.lat.toFixed(4)+","+gps.lon.toFixed(4); hamlet=true; title=norm(f.lieudit)||norm(f.commune)||"Point GPS"; }
+    else if(c){ [x,y]=px(c.lon,c.lat); key="c:"+c.insee; title=c.nom; }
+    else { unplaced++; continue; }
+    if(!g.has(key)) g.set(key,{key,x,y,hamlet,title,commune:c?c.nom:norm(f.commune),items:[]});
+    g.get(key).items.push(f);
+  }
+  return {groups:[...g.values()], unplaced};
+}
+function renderMarks(){
+  if(!mapBuilt) return;
+  const {groups,unplaced}=mapGroups(); const s=vb.w/FULL.w; const R=4.2*Math.max(s,.18);
+  // libellés plus lisibles en zoomant
+  $$("#map .lab text").forEach(t=>t.style.fontSize=(3.2*Math.max(s,.3))+"px");
+  $("#mMarks").innerHTML=groups.sort((a,b)=>a.items.length-b.items.length).map(gr=>{
+    const cnt={}; gr.items.forEach(f=>cnt[f.TYPE_MEUBLE]=(cnt[f.TYPE_MEUBLE]||0)+1);
+    const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0][0]; const r=gr.hamlet?R*.85:R; const col=gr.hamlet?"#3f6b3a":"#7a4524";
+    const sel=mapSel===gr.key;
+    return `<g class="mk" data-key="${esc(gr.key)}" style="cursor:pointer">
+      <circle cx="${gr.x}" cy="${gr.y}" r="${r}" fill="${sel?col:"#fffdf8"}" stroke="${col}" stroke-width="${r*.16}"/>
+      <svg x="${gr.x-r*.68}" y="${gr.y-r*.68}" width="${r*1.36}" height="${r*1.36}" viewBox="0 0 24 24" style="color:${sel?"#fff":col}"><path class="ico" d="${iconPath(top)}" stroke-width="2"/></svg>
+      ${gr.items.length>1?`<circle cx="${gr.x+r*.8}" cy="${gr.y-r*.8}" r="${r*.52}" fill="${col}"/><text x="${gr.x+r*.8}" y="${gr.y-r*.8+r*.2}" text-anchor="middle" style="font-size:${r*.6}px;fill:#fff;font-weight:700">${gr.items.length}</text>`:""}</g>`;
+  }).join("");
+  $("#mapNote").textContent = unplaced ? `${unplaced} fiche${unplaced>1?"s":""} sans commune reconnue ni GPS (non placée${unplaced>1?"s":""} sur la carte).` : "";
+}
+function renderMap(){ if(!mapBuilt){ buildMapBase(); applyVb(); } else renderMarks(); if(mapSel) renderMapPanel(); }
+function renderMapPanel(){
+  const gr=mapGroups().groups.find(g=>g.key===mapSel); const p=$("#mapPanel");
+  if(!gr){ p.classList.add("hidden"); return; }
+  const byLd=new Map(); gr.items.forEach(f=>{ const l=norm(f.lieudit)||""; if(!byLd.has(l)) byLd.set(l,[]); byLd.get(l).push(f); });
+  const sub = gr.hamlet ? `Hameau placé par GPS · commune : ${esc(gr.commune||"?")}` : `${byLd.size>1||[...byLd.keys()][0]?`${[...byLd.keys()].filter(Boolean).length} hameau(x) / lieu(x)-dit(s)`:"Bourg ou lieu non précisé"}`;
+  p.innerHTML=`<h3>${esc(gr.title)} — ${gr.items.length} meuble${gr.items.length>1?"s":""}</h3><div class="sub">${sub}</div>`+
+    [...byLd.entries()].sort((a,b)=>a[0].localeCompare(b[0])).map(([l,fs])=>`${byLd.size>1||l?`<div class="ld">${esc(l||"Sans lieu-dit")}</div>`:""}${fs.map(miniCard).join("")}`).join("");
+  p.classList.remove("hidden");
+}
+// interactions : glisser, molette, pincer, boutons
+(function(){
+  const svg=$("#map"); const pts=new Map(); let moved=0, start=null;
+  const toSvg=(cx,cy)=>{ const r=svg.getBoundingClientRect(); return [vb.x+(cx-r.left)/r.width*vb.w, vb.y+(cy-r.top)/r.height*vb.h]; };
+  function zoomAt(f,sx,sy){ const nw=Math.min(FULL.w*1.2,Math.max(FULL.w/14,vb.w*f)), k=nw/vb.w; vb={x:sx-(sx-vb.x)*k, y:sy-(sy-vb.y)*k, w:nw, h:vb.h*k}; applyVb(); }
+  svg.addEventListener("pointerdown",e=>{ pts.set(e.pointerId,[e.clientX,e.clientY]); moved=0; start={vb:{...vb},pts:new Map(pts)}; svg.setPointerCapture(e.pointerId); });
+  svg.addEventListener("pointermove",e=>{ if(!pts.has(e.pointerId)) return; const prev=pts.get(e.pointerId); pts.set(e.pointerId,[e.clientX,e.clientY]);
+    const r=svg.getBoundingClientRect();
+    if(pts.size===1){ const dx=e.clientX-prev[0], dy=e.clientY-prev[1]; moved+=Math.abs(dx)+Math.abs(dy); vb.x-=dx/r.width*vb.w; vb.y-=dy/r.height*vb.h; applyVb(); }
+    else if(pts.size===2){ const [a,b]=[...pts.values()]; const [a0,b0]=[...start.pts.values()]; if(!a0||!b0) return;
+      const d=Math.hypot(a[0]-b[0],a[1]-b[1]), d0=Math.hypot(a0[0]-b0[0],a0[1]-b0[1]); moved+=10;
+      vb={...start.vb}; const [sx,sy]=toSvg((a[0]+b[0])/2,(a[1]+b[1])/2); zoomAt(d0/d,sx,sy); }
+  });
+  const end=e=>{ if(!pts.has(e.pointerId)) return; pts.delete(e.pointerId); start={vb:{...vb},pts:new Map(pts)};
+    if(moved<6 && e.type==="pointerup"){ const el=document.elementFromPoint(e.clientX,e.clientY); const mk=el&&el.closest(".mk");
+      mapSel = mk ? (mapSel===mk.dataset.key?null:mk.dataset.key) : null; renderMarks(); if(mapSel) renderMapPanel(); else $("#mapPanel").classList.add("hidden"); } };
+  svg.addEventListener("pointerup",end); svg.addEventListener("pointercancel",end);
+  svg.addEventListener("wheel",e=>{ e.preventDefault(); const [sx,sy]=toSvg(e.clientX,e.clientY); zoomAt(e.deltaY>0?1.2:1/1.2,sx,sy); },{passive:false});
+  const mid=()=>[vb.x+vb.w/2, vb.y+vb.h/2];
+  $("#zIn").addEventListener("click",()=>zoomAt(1/1.5,...mid()));
+  $("#zOut").addEventListener("click",()=>zoomAt(1.5,...mid()));
+  $("#zReset").addEventListener("click",()=>{ vb={...FULL}; applyVb(); });
+})();
+
+/* ======================================================================
+   GALERIE
+   ====================================================================== */
+let galList=[], lbIdx=0;
+$("#gType").innerHTML+=OPTS.TYPE_MEUBLE.map(t=>`<option>${esc(t)}</option>`).join("");
+$("#gLeg").innerHTML+=LEGENDES.map(t=>`<option>${esc(t)}</option>`).join("");
+function renderGallery(){
+  const ft=$("#gType").value, fl=$("#gLeg").value; galList=[];
+  allFiches().sort((a,b)=>(codeOf(a)||"~").localeCompare(codeOf(b)||"~")).forEach(f=>{
+    if(ft && f.TYPE_MEUBLE!==ft) return;
+    (f.photos||[]).forEach((p,i)=>{ if(fl && p.legende!==fl) return; galList.push({f,p,i}); });
+  });
+  $("#gallery").innerHTML=galList.map((g,j)=>`<button data-j="${j}"><img loading="lazy" ${imgAttr(g.p)} alt=""><span>${esc(typeLabel(g.f))} · P${String(g.i+1).padStart(2,"0")}</span></button>`).join("");
+  $("#gCount").textContent = galList.length ? `${galList.length} photo${galList.length>1?"s":""}` : "";
+  $("#gEmpty").classList.toggle("hidden", galList.length>0);
+}
+$("#gType").addEventListener("change",renderGallery); $("#gLeg").addEventListener("change",renderGallery);
+$("#gallery").addEventListener("click",e=>{ const b=e.target.closest("button"); if(b) openLb(+b.dataset.j); });
+function openLb(j){ lbIdx=(j+galList.length)%galList.length; const g=galList[lbIdx]; if(!g) return;
+  setImg($("#lbImg"),g.p); const c=codeOf(g.f);
+  $("#lbCap").innerHTML=`<b>${esc(c?c+"-P"+String(g.i+1).padStart(2,"0"):typeLabel(g.f))}</b><br>${esc(typeLabel(g.f))} · ${esc(g.p.legende||"")}<br>${esc([g.f.lieudit,g.f.commune].filter(Boolean).join(", "))} <span style="opacity:.7">(${lbIdx+1}/${galList.length})</span>`;
+  $("#lb").classList.remove("hidden"); }
+const closeLb=()=>$("#lb").classList.add("hidden");
+$("#lbClose").addEventListener("click",closeLb);
+$("#lbPrev").addEventListener("click",()=>openLb(lbIdx-1)); $("#lbNext").addEventListener("click",()=>openLb(lbIdx+1));
+$("#lbOpen").addEventListener("click",()=>{ const g=galList[lbIdx]; closeLb(); openFiche(g.f.docId); });
+document.addEventListener("keydown",e=>{ if($("#lb").classList.contains("hidden")) return; if(e.key==="Escape") closeLb(); if(e.key==="ArrowLeft") openLb(lbIdx-1); if(e.key==="ArrowRight") openLb(lbIdx+1); });
+(function(){ let x0=null; const lb=$("#lb");
+  lb.addEventListener("pointerdown",e=>{ if(e.target.tagName==="IMG") x0=e.clientX; });
+  lb.addEventListener("pointerup",e=>{ if(x0==null) return; const dx=e.clientX-x0; x0=null; if(Math.abs(dx)>50) openLb(lbIdx+(dx<0?1:-1)); }); })();
+
+/* ======================================================================
+   ANNUAIRE (privé, toutes autorisations confondues)
+   ====================================================================== */
+function peopleIndex(){
+  const m=new Map();
+  allFiches().sort((a,b)=>(a.updatedAt||"").localeCompare(b.updatedAt||"")).forEach(f=>{
+    const k=fold(f.PROPRIETAIRE); if(!k) return;
+    if(!m.has(k)) m.set(k,{key:k,fiches:[]}); const p=m.get(k); p.fiches.push(f);
+    for(const x of ["PROPRIETAIRE","proprioType","tel","email","commune","insee","cp","lieudit","adresse","gps"]) if(norm(f[x])) p[x]=f[x]; // la plus récente l'emporte
+    p.last = f.DATE_COLLECTE > (p.last||"") ? f.DATE_COLLECTE : p.last;
+  });
+  return m;
+}
+let openPerson=null;
+function renderPeople(){
+  const q=fold($("#pq").value); const all=[...peopleIndex().values()].sort((a,b)=>a.key.localeCompare(b.key));
+  const shown=all.filter(p=>!q || fold([p.PROPRIETAIRE,p.commune,p.lieudit,p.adresse,p.tel,p.email,p.cp].join(" ")).includes(q) || (p.tel||"").replace(/\D/g,"").includes(q.replace(/\D/g,"")||"§"));
+  $("#pCount").textContent = all.length ? `${shown.length} personne${shown.length>1?"s":""}${shown.length!==all.length?" sur "+all.length:""}` : "";
+  $("#pEmpty").classList.toggle("hidden", all.length>0);
+  $("#people").innerHTML=shown.map(p=>{
+    const lv=[...new Set(p.fiches.map(f=>authLevel(f.auth)))]; const sig=p.fiches.filter(f=>f.signature).length;
+    const ini=(p.PROPRIETAIRE||"?").split(/\s+/).map(w=>w[0]).join("").slice(0,2).toUpperCase(); const open=openPerson===p.key;
+    const loc=[p.lieudit,p.commune].filter(Boolean).join(", ");
+    return `<div class="person" data-key="${esc(p.key)}"><div class="top"><div class="av">${esc(ini)}</div><div style="flex:1;min-width:0">
+      <div class="nm">${esc(p.PROPRIETAIRE)}</div><div class="meta">${esc(loc||"Commune non renseignée")}${p.proprioType&&p.proprioType!=="Particulier"?" · "+esc(p.proprioType):""}</div>
+      <div class="tags"><span class="pill">${p.fiches.length} meuble${p.fiches.length>1?"s":""}</span>${lv.map(l=>`<span class="pill ${l==="Oui"?"ok":l==="Non"?"bad":"warn"}">autorisation ${l.toLowerCase()}</span>`).join("")}${sig?`<span class="pill ok">${sig} signée${sig>1?"s":""}</span>`:""}</div></div></div>
+      ${open?`<div class="more">
+        ${p.tel?`<div class="line">📞 <a href="tel:${esc(p.tel.replace(/[^\d+]/g,""))}">${esc(p.tel)}</a></div>`:""}
+        ${p.email?`<div class="line">✉️ <a href="mailto:${esc(p.email)}">${esc(p.email)}</a></div>`:""}
+        ${p.adresse||p.cp?`<div class="line">📍 ${esc([p.adresse,p.lieudit,[p.cp,p.commune].filter(Boolean).join(" ")].filter(Boolean).join(", "))}</div>`:""}
+        ${p.last?`<div class="line" style="color:var(--muted)">Dernière visite : ${esc(frDate(p.last))}</div>`:""}
+        <div style="margin-top:8px">${p.fiches.map(miniCard).join("")}</div>
+        <div class="pacts"><button class="btn small primary" data-newfor="${esc(p.key)}">＋ Fiche chez ${esc(p.PROPRIETAIRE.split(" ")[0])}</button></div></div>`:""}</div>`;
+  }).join("");
+}
+$("#pq").addEventListener("input",renderPeople);
+$("#people").addEventListener("click",e=>{
+  const nb=e.target.closest("[data-newfor]");
+  if(nb){ const p=peopleIndex().get(nb.dataset.newfor); const base={}; for(const x of ["PROPRIETAIRE","proprioType","tel","email","commune","insee","cp","lieudit","adresse","gps"]) if(p[x]) base[x]=p[x];
+    const lastF=p.fiches[p.fiches.length-1]; if(lastF){ base.auth={...(lastF.auth||{})}; if(lastF.SOUS_REGION_CODE) base.SOUS_REGION_CODE=lastF.SOUS_REGION_CODE; }
+    newFiche(base); return; }
+  if(e.target.closest(".mini")||e.target.closest("a")) return;
+  const t=e.target.closest(".person .top"); if(t){ const k=t.parentElement.dataset.key; openPerson = openPerson===k?null:k; renderPeople(); }
+});
+$("#pCsv").addEventListener("click",async()=>{
+  const rows=[["Nom","Type","Téléphone","E-mail","Adresse","Hameau / lieu-dit","Code postal","Commune","Nb meubles","Codes","Autorisations","Dernière visite"]];
+  for(const p of [...peopleIndex().values()].sort((a,b)=>a.key.localeCompare(b.key)))
+    rows.push([p.PROPRIETAIRE,p.proprioType,p.tel,p.email,p.adresse,p.lieudit,p.cp,p.commune,p.fiches.length,p.fiches.map(f=>codeOf(f)||"—").join(" "),[...new Set(p.fiches.map(f=>authLevel(f.auth)))].join("/"),frDate(p.last)]);
+  const csv="﻿"+rows.map(r=>r.map(v=>{ const s=String(v??""); return /[;"\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; }).join(";")).join("\r\n");
+  saveFile(`annuaire_prive_berry_${today()}.csv`, new Blob([csv],{type:"text/csv"}));
+});
+
+/* ---------- démarrage ---------- */
+(async function init(){
+  idb=await openIdb(); outbox=await outboxAll(); renderOutbox(); show(tab);
+  const d=await draftGet();
+  if(d&&d.cur){ $("#draftBanner").classList.remove("hidden");
+    $("#draftResume").onclick=()=>{ cur=blankFiche(d.cur); cur.photos=d.cur.photos||[]; cur.signature=d.cur.signature||null; removedAssets=d.removedAssets||[]; dirty=true; show("form"); fillForm(); $("#draftBanner").classList.add("hidden"); };
+    $("#draftDrop").onclick=()=>{ draftDel(); $("#draftBanner").classList.add("hidden"); }; }
+  $$(".act-settings").forEach(b=>b.addEventListener("click",openSettings)); $("#ghConnect").addEventListener("click",openSettings);
+  renderExportBanner();
+  if(ghReady()){ window._lastLoad=Date.now(); ghLoad(); } else { setStatus("Non connecté","warn"); openSettings(); }
+  if("serviceWorker" in navigator && location.protocol==="https:") navigator.serviceWorker.register("sw.js").catch(()=>{});
+})();
+window.addEventListener("beforeunload",e=>{ if(dirty){ e.preventDefault(); e.returnValue=""; } });
+</script>
+</body>
+</html>
