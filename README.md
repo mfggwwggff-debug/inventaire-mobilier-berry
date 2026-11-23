@@ -27,7 +27,7 @@ GitHub → *Settings* → *Developer settings* → *Personal access tokens* → 
 
 - **Repository access** : *Only select repositories* → le dépôt de données uniquement
 - **Permissions** → *Contents* : **Read and write** (*Metadata : Read* s'ajoute tout seul)
-- Une clé par appareil ou par personne, nommée clairement (ex. « Téléphone de Constant »), pour pouvoir la révoquer à tout moment en cas de perte.
+- Une clé par appareil ou par personne, nommée clairement (ex. « Téléphone de la personne qui collecte »), pour pouvoir la révoquer à tout moment en cas de perte.
 
 ## Organisation du dépôt de données (privé)
 
