@@ -1653,7 +1653,9 @@ async function ghLoad(){
     }catch(e){
       ghOnline=false; console.warn(e);
       if(e.status===401) setStatus("Clé refusée","bad"); else if(e.status===404) setStatus("Dépôt introuvable","bad");
-      else setStatus(navigator.onLine?"GitHub injoignable":"Hors ligne","warn");
+      else if(e.status===403) { setStatus("Permission manquante","bad"); toast("La clé n'a pas la permission « Contents : Read and write ». Touchez la pastille en haut pour la remplacer.",6000); }
+      else { setStatus(navigator.onLine?"GitHub injoignable":"Hors ligne","warn"); if(e.status) toast("Erreur GitHub "+e.status+" : "+((e.body&&e.body.message)||""),6000); }
+      window._ghErr=e;
     }finally{ ghLoading=null; if($("#vForm").classList.contains("hidden")) renderAll(); }
   })();
   return ghLoading;
@@ -1729,6 +1731,8 @@ function openSettings(){
     try{ const r=await ghJson(repoPath(""));
       if(!r.private){ msg.innerHTML=`<span class="warn-txt">⚠ Ce dépôt est PUBLIC : tout le monde verrait les données personnelles. Rendez-le privé dans GitHub (Settings → Danger Zone → Change visibility), puis réessayez.</span>`; ghCfg=old; return; }
       if(r.permissions && !r.permissions.push){ msg.innerHTML=`<span class="warn-txt">Cette clé peut lire mais pas écrire. Donnez-lui l'autorisation « Contents : Read and write ».</span>`; ghCfg=old; return; }
+      try{ await ghHead(); await ghJson(repoPath(`/git/blobs`),{method:"POST",body:JSON.stringify({content:"dGVzdA==",encoding:"base64"})}); }
+      catch(e2){ ghCfg=old; msg.innerHTML=`<span class="warn-txt">${e2.status===403||e2.status===404?"La clé est reconnue mais n'a pas la permission <b>Contents : Read and write</b> sur ce dépôt. Sur GitHub, modifiez la clé → Repository permissions → Contents → Read and write, puis réessayez.":"Erreur GitHub "+(e2.status||"réseau")+" : "+esc((e2.body&&e2.body.message)||e2.message)}</span>`; return; }
       try{ localStorage.setItem("ghCfg",JSON.stringify(c)); }catch(e){}
       closeModal(); toast("Connecté au dépôt ✓"); fiches=new Map(); ghLoad();
     }catch(e){ ghCfg=old; msg.innerHTML=`<span class="warn-txt">${e.status===401?"Clé refusée (expirée ou mal copiée).":e.status===404?"Dépôt introuvable, ou la clé n'a pas accès à ce dépôt.":"Connexion impossible : vérifiez le réseau."}</span>`; }
@@ -1736,7 +1740,7 @@ function openSettings(){
   const out=$("#sOut"); if(out) out.onclick=()=>confirmBox("Déconnecter cet appareil ?", outbox.length?`Attention : ${outbox.length} fiche(s) pas encore envoyée(s) resteront bloquées sur cet appareil.`:"La clé sera effacée de cet appareil. Les données restent dans GitHub.","Déconnecter",()=>{
     ghCfg={...ghCfg, token:""}; try{ localStorage.setItem("ghCfg",JSON.stringify(ghCfg)); }catch(e){} fiches=new Map(); setStatus("Non connecté","warn"); renderAll(); },true);
 }
-$("#status").addEventListener("click",()=>{ if(!ghReady()) openSettings(); else ghLoad(); });
+$("#status").addEventListener("click",()=>{ if(!ghReady() || (!ghOnline && window._ghErr && [401,403,404].includes(window._ghErr.status))) openSettings(); else ghLoad(); });
 document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible" && ghReady() && Date.now()-(window._lastLoad||0)>60000){ window._lastLoad=Date.now(); ghLoad(); } });
 
 /* ======================================================================
