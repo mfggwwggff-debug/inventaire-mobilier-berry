@@ -47,8 +47,8 @@ header.top h1 small{display:block;font-family:"Source Sans 3",sans-serif;font-we
 .tools input{flex:1;min-width:0;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--paper)}
 .tools select{padding:11px 10px;border-radius:12px;border:1px solid var(--line);background:var(--paper);max-width:42%}
 .count{color:var(--muted);font-size:.88rem;margin:6px 2px 10px}
-.cards{display:grid;gap:10px}
-.card{display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px;text-align:left;width:100%;align-items:center}
+.cards{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.card{min-width:0;display:flex;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:10px;text-align:left;width:100%;align-items:center}
 .card .th{width:74px;height:74px;border-radius:10px;background:var(--accent-soft) center/cover no-repeat;flex:none;display:grid;place-items:center;font-size:1.5rem}
 .card .bd{flex:1;min-width:0}
 .card .t{font-weight:700;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
@@ -66,7 +66,10 @@ header.top h1 small{display:block;font-family:"Source Sans 3",sans-serif;font-we
 .f>label,.lbl{display:block;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:6px}
 .lbl em{font-style:normal;text-transform:none;letter-spacing:0;font-weight:400}
 .req::after{content:" *";color:var(--danger)}
-.f input[type=text],.f input[type=date],.f input[type=number],.f textarea{width:100%;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#fff}
+.f input:not([type=checkbox]):not([type=file]),.f textarea{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:11px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;font-size:16px;-webkit-appearance:none;appearance:none}
+.f input[type=date]{min-height:46px;text-align:left;line-height:22px}
+.f input[type=date]::-webkit-date-and-time-value{text-align:left}
+.row>.f,.dims>div{min-width:0}
 .f textarea{min-height:76px;resize:vertical}
 .f input:focus,.f textarea:focus,.tools input:focus{outline:2px solid var(--accent-2);outline-offset:-1px;border-color:transparent}
 .f.missing input,.f.missing textarea{border-color:var(--danger);background:#fff7f5}
@@ -132,7 +135,10 @@ header.top h1 small{display:block;font-family:"Source Sans 3",sans-serif;font-we
 .jump::-webkit-scrollbar{display:none}
 .jump a{flex:none;font-size:.82rem;padding:6px 11px;border-radius:99px;background:var(--paper);border:1px solid var(--line);color:var(--accent);text-decoration:none;font-weight:600}
 @media (min-width:700px){.photos{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}}
-.wrap{padding-bottom:110px}
+.wrap{padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+html,body{overflow-x:hidden}
+#barForm .btn{white-space:nowrap;padding-left:10px;padding-right:10px}
+#vForm{padding-bottom:30px}
 .view{padding-top:4px}
 .h{font-size:1.15rem;margin:26px 2px 10px}
 .hero{margin-top:14px;background:linear-gradient(135deg,#7a4524,#a8653a);color:#fff;border-radius:18px;padding:18px 18px 14px}
@@ -469,7 +475,7 @@ header.top h1 small{display:block;font-family:"Source Sans 3",sans-serif;font-we
 </nav>
 <div class="bar hidden" id="barForm"><div class="in">
   <button class="btn icon ghost" id="cancelBtn" aria-label="Retour">✕</button>
-  <button class="btn" id="saveNextBtn">Enregistrer + suivante</button>
+  <button class="btn" id="saveNextBtn" title="Enregistrer et commencer une fiche chez le même propriétaire">Enreg. + suivante</button>
   <button class="btn primary" id="saveBtn">Enregistrer</button>
 </div></div>
 

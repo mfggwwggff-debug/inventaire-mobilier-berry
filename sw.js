@@ -1,6 +1,6 @@
 // Permet d'ouvrir l'application sans réseau (sur le terrain).
 // Les données ne passent jamais par ici : elles vont directement vers l'API GitHub.
-const CACHE = "inventaire-berry-v3";
+const CACHE = "inventaire-berry-v4";
 const SHELL = ["./", "index.html", "jszip.min.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png", "icon-512-maskable.png", "icon.svg", "favicon-32.png"];
 
 self.addEventListener("install", e => {
